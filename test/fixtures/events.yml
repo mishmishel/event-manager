@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  description: MyString
+  date: 2023-12-13
+  battle: false
+  jam: false
+
+two:
+  title: MyString
+  description: MyString
+  date: 2023-12-13
+  battle: false
+  jam: false
