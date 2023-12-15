@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # GET events by id
   get "/events/:event_id", to: "events#show_event"
 
-  # GET events index
-  get "/events", to: "events#index"
+  # GET all events that have battle = true
+  get "/events/battles", to: "events#all_battles"
+
 end
