@@ -18,7 +18,11 @@ class EventsController < ApplicationController
 
     def all_battles
         battles = Event.where(battle: true)
-        
         render json: battles, except: [:created_at, :updated_at, :id]
+    end
+
+    def all_jams
+        jams = Event.where(jam: true)
+        render json: jams, except: [:created_at, :updated_at, :id]
     end
 end

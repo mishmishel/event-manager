@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   get "/events/:event_id", to: "events#show_event"
 
   # GET all events that have battle = true
-  get "/events/battles", to: "events#all_battles"
+  get "/battles", to: "events#all_battles"
+
+  # GET all events that have jam = true
+  get "/events/jams", to: "events#all_jams"
 
 end
+
