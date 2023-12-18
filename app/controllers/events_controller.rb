@@ -23,24 +23,21 @@ class EventsController < ApplicationController
     end
 
     def create
-        title = params["title"]
-        description = params["description"]
-        date = params["date"]
-        battle = params["battle"]
-        jam = params["jam"]
-
-        #parse date string into a Date object
-        parsed_date = Date.parse(date)
-
-        event = Event.create(
-            title: title,
-            description: description,
-            date: parsed_date,
-            battle: battle, 
-            jam: jam
-        )
+        event = Event.create(event_params)
         
         render json: event, except: [:created_at, :updated_at, :id]
+    end
+
+    private
+
+    def event_params
+        # Permitting params
+        allowed_params = params.permit(:id, :title, :description, :date, :battle, :jam)
+
+        # Parse date string into a Date object and replace date in permitted params
+        allowed_params[:date] = Date.parse(allowed_params[:date]) if allowed_params[:date].present?
+
+        allowed_params
     end
 
     # def all_battles
