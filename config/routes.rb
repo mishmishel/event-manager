@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :events, only: [:index, :show, :create]
+  resources :events, only: [:index, :show, :create, :update]
 
   # GET /events
   get "/events", to: "events#index"

@@ -28,6 +28,14 @@ class EventsController < ApplicationController
         render json: event, except: [:created_at, :updated_at, :id]
     end
 
+    def update 
+        event = Event.find_by(id: params[:id])
+
+        if event 
+            event.update(event_params)
+        end
+    end
+
     def update_interest
         event = Event.find_by(id: params[:id])
 
@@ -51,7 +59,7 @@ class EventsController < ApplicationController
 
         allowed_params
     end
-    
+
     # def all_battles
     #     battles = Event.where(battle: true)
     #     render json: battles, except: [:created_at, :updated_at, :id]
