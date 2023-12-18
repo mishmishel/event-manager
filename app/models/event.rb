@@ -1,6 +1,12 @@
 class Event < ApplicationRecord
 
-    def title_date
-        "#{self.title} #{self.date}"
+    # Setting default values for attributes
+    after_initialize :set_defaults
+
+    private
+    
+    def set_defaults
+        self.interest ||= 0
     end
+
 end

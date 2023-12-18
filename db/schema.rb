@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_13_024101) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_18_032609) do
   create_table "events", force: :cascade do |t|
     t.string "title"
     t.string "description"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_13_024101) do
     t.boolean "jam"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "interest"
   end
 
 end

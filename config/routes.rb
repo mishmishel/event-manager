@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   # POST to create new events
   post "/events", to: "events#create"
 
+  # PATCH to update events
+  patch "/events/:id/interest", to: "events#update_interest"
+
   # # GET all events that have jam = true
   # get "/events/:jams", to: "events#all_jams"
 
