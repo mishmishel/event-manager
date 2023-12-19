@@ -72,7 +72,7 @@ class EventsController < ApplicationController
 
     def event_params
         # Permitting params
-        allowed_params = params.permit(:id, :title, :description, :date, :battle, :jam, :interest)
+        allowed_params = params.permit(:id, :title, :description, :date, :battle, :jam, :interest, :user_id)
 
         # Parse date string into a Date object and replace date in permitted params
         allowed_params[:date] = Date.parse(allowed_params[:date]) if allowed_params[:date].present?

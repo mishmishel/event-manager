@@ -1,4 +1,5 @@
 class Event < ApplicationRecord
+    belongs_to :user
 
     # Setting default values for attributes
     after_initialize :set_defaults

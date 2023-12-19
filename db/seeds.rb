@@ -8,26 +8,41 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-Event.create(
-  title: "Smoked",
-  description: "Beginner friendly battle",
-  date: Date.new(2023, 10, 31),
-  battle: true,
-  jam: false
-)
+# Event.create(
+#   title: "Smoked",
+#   description: "Beginner friendly battle",
+#   date: Date.new(2023, 10, 31),
+#   battle: true,
+#   jam: false
+# )
 
-Event.create(
-  title: "Synergy",
-  description: "SXP hosted event for intermediate to advanced dancers",
-  date: Date.new(2023, 12, 12),
-  battle: true,
-  jam: false
-)
+# Event.create(
+#   title: "Synergy",
+#   description: "SXP hosted event for intermediate to advanced dancers",
+#   date: Date.new(2023, 12, 12),
+#   battle: true,
+#   jam: false
+# )
 
-Event.create(
-  title: "UNI Jam",
-  description: "Uni Society hosted jam",
-  date: Date.new(2023, 05, 12),
-  battle: false,
-  jam: true
-)
+# Event.create(
+#   title: "UNI Jam",
+#   description: "Uni Society hosted jam",
+#   date: Date.new(2023, 05, 12),
+#   battle: false,
+#   jam: true
+# )
+
+# User.create (
+#   username: "misheltyur",
+#   first_name: "Mishel",
+#   last_name: "Tyurkova",
+#   email: "misheltyurkova@gmail.com",
+#   password: "12345"
+# )
+
+# User.create(
+#   username: "misheltyur",
+#   first_name: "Mishel",
+#   last_name: "Tyurkova",
+#   email: "misheltyurkova@gmail.com",
+#   password: "12345")
