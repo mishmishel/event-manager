@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :events, only: [:index, :show, :create, :update]
+  resources :events, only: [:index, :show, :create, :update, :delete]
 
   # GET /events
   get "/events", to: "events#index"
@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
   # PATCH to update events
   patch "/events/:id/interest", to: "events#update_interest"
+
+  # DELETE events
+  delete "/events/:id", to: "events#destroy"
 
   # # GET all events that have jam = true
   # get "/events/:jams", to: "events#all_jams"

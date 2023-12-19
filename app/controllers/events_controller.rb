@@ -16,7 +16,7 @@ class EventsController < ApplicationController
         event = Event.find_by(id: params[:id])
 
         if !event
-            render json: {status: "No events yet"}
+            render_record_not_found
         else
             render json: event, except: [:created_at, :updated_at, :id]
         end
@@ -33,6 +33,10 @@ class EventsController < ApplicationController
 
         if event 
             event.update(event_params)
+
+            render json: event
+        else
+            render_record_not_found
         end
     end
 
@@ -45,6 +49,19 @@ class EventsController < ApplicationController
             event.update(interest: interest_incremented)
 
             render json: {event: event}
+        else
+            render_record_not_found
+        end
+    end
+
+    def destroy
+        event = Event.find_by(id: params[:id])
+
+        if event
+            event.destroy
+            render json: { status: "deleted" }
+        else
+            render_record_not_found
         end
     end
 
@@ -58,6 +75,10 @@ class EventsController < ApplicationController
         allowed_params[:date] = Date.parse(allowed_params[:date]) if allowed_params[:date].present?
 
         allowed_params
+    end
+
+    def render_record_not_found
+        render json: {error: "Event can't be found"}, status: :not_found
     end
 
     # def all_battles
