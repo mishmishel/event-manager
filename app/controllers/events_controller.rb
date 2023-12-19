@@ -18,7 +18,7 @@ class EventsController < ApplicationController
         if !event
             render_record_not_found
         else
-            render json: event, include: :user, except: [:created_at, :updated_at, :id]
+            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { user: { only: [:first_name, :last_name] } })
         end
     end
 
