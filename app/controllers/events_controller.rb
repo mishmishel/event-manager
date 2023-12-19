@@ -23,9 +23,12 @@ class EventsController < ApplicationController
     end
 
     def create
-        event = Event.create(event_params)
+        event = Event.create!(event_params)
         
         render json: event, except: [:created_at, :updated_at, :id]
+
+        rescue ActiveRecord::RecordInvalid => invalid 
+            render json: { errors: invalid.record.errors }, status: :unprocessable_entity
     end
 
     def update 
