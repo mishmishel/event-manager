@@ -1,33 +1,15 @@
 import './App.css';
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Home from './components/Home'; 
 
 function App() {
-
-  useEffect(() => {
-    fetch('/events')
-    .then(response => response.json() )
-    .then(json => {
-      setEvents(json)
-    })
-  }, [])
-
-  const [events, setEvents] = useState([]);
   return (
-    <div className="App">
-      <h1>Events:</h1>
-      { events.length > 0 
-      ?
-        <ul>
-          {
-            events.map((event)=> {
-              return <li>{event.title}</li>
-            })
-          }
-        </ul>
-      :
-      <p>No Events</p>
-      }
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+      </Routes>
+    </Router>
   );
 }
 
