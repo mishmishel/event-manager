@@ -13,7 +13,7 @@ class EventsController < ApplicationController
         if events.empty?
             render json: { status: "No events yet" }
           else
-            render json: events, except: [:created_at, :updated_at, :id, :user_id]
+            render json: events
         end
     end
 

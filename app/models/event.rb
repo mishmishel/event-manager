@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
     belongs_to :user
+    has_many :comments, through: :user
 
     # Setting default values for attributes
     after_initialize :set_defaults
