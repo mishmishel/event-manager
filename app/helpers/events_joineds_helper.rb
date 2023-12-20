@@ -1,0 +1,2 @@
+module EventsJoinedsHelper
+end
