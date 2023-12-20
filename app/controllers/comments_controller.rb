@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
 
     skip_before_action :verify_authenticity_token, only: :create
-    before_action :find_event, only: [:show, :create]
+    before_action :find_event, only: [:show, :create] # calling find event before show and create
 
     def index
         comments = Comment.all
@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
         event = Event.find(params[:event_id])
         comments = event.comments.includes(:user)
         
-        render json: comments, each_serializer: CommentSerializer, status: :ok
+        render json: comments, each_serializer: CommentSerializer, status: :ok # using CommentSerializer
     end
 
     def create

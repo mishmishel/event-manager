@@ -47,8 +47,8 @@
 #   email: "misheltyurkova@gmail.com",
 #   password: "12345")
 
-Comment.create(
-  text: "This is a reminder to enroll to this event!",
-  user_id: 1,
-  event_id: 19
-)
+# Comment.create(
+#   text: "This is a reminder to enroll to this event!",
+#   user_id: 1,
+#   event_id: 19
+# )
