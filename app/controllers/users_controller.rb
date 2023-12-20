@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-    skip_before_action :verify_authenticity_token, only: :create
+    skip_before_action :verify_authenticity_token
 
     def index
         users = User.all 
@@ -21,6 +21,17 @@ class UsersController < ApplicationController
     
         rescue ActiveRecord::RecordInvalid => invalid 
         render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+    end
+
+    def destroy
+        user = User.find_by(id: params[:id])
+
+        if user
+            user.destroy
+            render json: { status: "deleted" }
+        else
+            render_record_not_found
+        end
     end
 
     private 
