@@ -11,10 +11,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show] do 
     resources :events, only: [:index, :create]
   end
-
-  # resources :events do
-  #   resources :comments, only: [:index, :create]
-  # end
+  
+  # /events/event_id/comments
+  resources :events, only: [:show] do
+    resources :comments, only: [:index, :show, :create, :delete]
+  end
 
   # # GET all events that have jam = true
   # get "/events/:jams", to: "events#all_jams"

@@ -1,26 +1,21 @@
 class CommentsController < ApplicationController
-    skip_before_action :verify_authenticity_token
-  
+
     def index
-        event = Event.find(params[:event_id])
-      comments = event.comments
-      render json: comments, status: :ok
+        comments = Comment.all
+        
+        render json: comments
     end
-  
-    def create
+
+    def show
         event = Event.find(params[:event_id])
-      comment = event.comments.new(comment_params.merge(user_id: params[:comment][:user_id]))
-  
-      if comment.save
-        render json: comment, status: :created
-      else
-        render json: comment.errors, status: :unprocessable_entity
-      end
+        comments = event.comments.includes(:user)
+    
+        render json: comments, each_serializer: CommentSerializer, status: :ok
     end
-  
+    
     private
-  
+    
     def comment_params
-      params.require(:comment).permit(:text)
+        params.require(:comment).permit(:text, :user_id)
     end
 end
