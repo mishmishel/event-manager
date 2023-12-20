@@ -1,4 +1,11 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :id, :text, :created_at
-  belongs_to :user, serializer: UserSerializer
+  attributes :text, :user
+
+  def user
+    {
+      first_name: object.user.first_name,
+      last_name: object.user.last_name
+    }
+  end
+  
 end
