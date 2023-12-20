@@ -18,7 +18,11 @@ Rails.application.routes.draw do
   # DELETE events
   delete "/events/:id", to: "events#destroy"
 
-  resources :users, only: [:index, :show]
+  resources :users, only: [:index]
+
+  resources :users, only: [:show] do 
+    resources :events, only: [:index]
+  end
 
   # # GET all events that have jam = true
   # get "/events/:jams", to: "events#all_jams"

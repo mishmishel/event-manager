@@ -3,12 +3,17 @@ class EventsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
     def index
-        events = Event.all
+        if params[:user_id]
+            user = User.find_by(id: params[:user_id])
+            events = user.events
+        else
+            events = Event.all
+        end
 
         if events.empty?
-            render json: {status: "No events yet"}
-        else
-            render json: events, except: [:created_at, :updated_at, :id]
+            render json: { status: "No events yet" }
+          else
+            render json: events, except: [:created_at, :updated_at, :id, :user_id]
         end
     end
 
@@ -17,7 +22,7 @@ class EventsController < ApplicationController
 
         if !event
             render_record_not_found
-        else
+        else # rendering event with credit to user 
             render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { user: { only: [:first_name, :last_name] } })
         end
     end
