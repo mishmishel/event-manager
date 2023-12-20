@@ -28,10 +28,15 @@ class EventsController < ApplicationController
     end
 
     def create
-        event = Event.create!(event_params)
-        
-        render json: event, except: [:created_at, :updated_at, :id]
-
+        if params[:user_id]
+            user = User.find_by(id: params[:user_id])
+            event = user.events.create!(event_params)
+            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { user: { only: [:first_name, :last_name] } })
+        else
+            event = Event.create!(event_params)
+            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id]) 
+        end
+       
         rescue ActiveRecord::RecordInvalid => invalid 
             render json: { errors: invalid.record.errors }, status: :unprocessable_entity
     end
