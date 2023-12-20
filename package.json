@@ -2,7 +2,7 @@
   "dependencies": {
     "@remix-run/react": "^2.4.0",
     "@remix-run/router": "^1.14.0",
-    "react-router-dom": "^6.0.0",
+    "react-router-dom": "^6.21.0",
     "react-scripts": "^5.0.1"
   }
 }
