@@ -2,7 +2,10 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Home from './components/Home';
 import Users from './components/Users';
+import Events from './components/Events';
+import EventInfo from './components/EventInfo';
 import UserInfo from './components/UserInfo';
+import EventsJoined from './components/EventsJoined';
 
 function App() {
   return (
@@ -10,7 +13,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/users" element={<Users />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventInfo />} />
         <Route path="/users/:id" element={<UserInfo />} />
+        <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
         <Route path="*" element={<div><p>No page found</p></div>} />
       </Routes>
     </Router>
