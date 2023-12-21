@@ -5,6 +5,7 @@ export default function UserInfo() {
   const [user, setUser] = useState({});
   const [eventList, setEventList] = useState([]);
   const [selectedEventId, setSelectedEventId] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -28,7 +29,7 @@ export default function UserInfo() {
   const handleJoinEvent = (e) => {
     e.preventDefault();
 
-    // Make a request to your Rails API to join the event
+
     fetch(`/users/${id}/events_joineds`, {
       method: 'POST',
       headers: {
@@ -39,7 +40,11 @@ export default function UserInfo() {
       .then(response => response.json())
       .then(json => {
         console.log("Join Event Response:", json);
-        // Handle success or display a message to the user
+        if (json.status === 'Joined successfully') {
+          setSuccessMessage('Successfully joined the event!');
+        } else {
+          setSuccessMessage('Failed to join the event. Perhaps you have already joined?');
+        }
       });
   };
 
@@ -49,7 +54,6 @@ export default function UserInfo() {
         <>
           <h1>{user.first_name} {user.last_name}</h1>
 
-          {/* Link to events joined by the user */}
           <Link to={`/users/${id}/events_joineds`}>Events Joined</Link>
 
         </>
@@ -59,7 +63,7 @@ export default function UserInfo() {
 
       <h2>Join an Event</h2>
       <form onSubmit={handleJoinEvent}>
-        <label htmlFor="events">Events</label>
+        <label value="events">Events</label>
         <select
           id="events"
           value={selectedEventId}
@@ -74,6 +78,8 @@ export default function UserInfo() {
         </select>
         <button type="submit">Join Event</button>
       </form>
+
+      {successMessage && <p>{successMessage}</p>}
     </div>
   );
 }

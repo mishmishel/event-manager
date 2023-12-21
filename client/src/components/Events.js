@@ -28,6 +28,7 @@ export default function Events() {
                 :
                 <p>No event found</p>
             }
+            < Link to="/events/new"><button>Create New Event</button></Link>
         </div>
     )
 }
