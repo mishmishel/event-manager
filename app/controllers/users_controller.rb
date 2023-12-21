@@ -11,8 +11,11 @@ class UsersController < ApplicationController
     def show
         user = User.find_by(id: params[:id])
 
-        # rendering user with events they have created
-        render json: user.to_json(except: [:created_at, :updated_at, :id, :password], include: { events: { only: [:title, :date] }})
+        if user
+            render json: user.to_json(except: [:created_at, :updated_at, :id, :password], include: { events: { only: [:title, :date] }})
+        else
+            render_record_not_found
+        end
     end
 
     def create
@@ -39,6 +42,10 @@ class UsersController < ApplicationController
     def user_params
         # Permitting params
         allowed_params = params.permit(:id, :first_name, :last_name, :username)
+    end
+
+    def render_record_not_found
+        render json: {error: "No record found"}, status: :not_found 
     end
 
 end
