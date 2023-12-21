@@ -1,6 +1,5 @@
 class CommentsController < ApplicationController
-
-    skip_before_action :verify_authenticity_token, only: :create
+    
     before_action :find_event, only: [:show, :create] # calling find event before show and create
 
     def index

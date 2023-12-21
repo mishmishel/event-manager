@@ -22,5 +22,7 @@ Rails.application.routes.draw do
     resources :events_joineds, only: [:index, :show, :create]
   end
 
+  # user login
+  post '/login', to: "sessions#create"
 end
 

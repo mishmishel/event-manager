@@ -1,7 +1,5 @@
 class EventsJoinedsController < ApplicationController
 
-    skip_before_action :verify_authenticity_token, only: :create
-
     def create
         user = User.find(params[:user_id])
         event = Event.find(params[:event_id])

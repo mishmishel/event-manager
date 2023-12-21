@@ -1,7 +1,5 @@
 class EventsController < ApplicationController
 
-    skip_before_action :verify_authenticity_token
-
     def index
         if params[:user_id]
             user = User.find_by(id: params[:user_id])
