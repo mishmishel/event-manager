@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 export default function EventInfo() {
   const [event, setEvent] = useState({});
@@ -22,6 +22,8 @@ export default function EventInfo() {
           <h1>{event.title}</h1>
           <h2>{event.date}</h2>
           <p>{event.description}</p>
+
+          <Link to={`/events/${id}/comments`}>View Comments</Link>
         </>
       ) : (
         <p>No event found</p>

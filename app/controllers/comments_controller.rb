@@ -4,9 +4,9 @@ class CommentsController < ApplicationController
     before_action :find_event, only: [:show, :create] # calling find event before show and create
 
     def index
-        comments = Comment.all
-        
-        render json: comments
+        event = Event.find(params[:event_id])
+        comments = event.comments
+        render json: comments, each_serializer: CommentSerializer
     end
 
     def show

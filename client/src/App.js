@@ -6,6 +6,8 @@ import Events from './components/Events';
 import EventInfo from './components/EventInfo';
 import UserInfo from './components/UserInfo';
 import EventsJoined from './components/EventsJoined';
+import Comments from './components/Comments';
+<Route path="/events/:eventId/comments" element={<Comments />} />
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventInfo />} />
         <Route path="/users/:id" element={<UserInfo />} />
+        <Route path="/events/:id/comments" element={<Comments />} />
         <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
         <Route path="*" element={<div><p>No page found</p></div>} />
       </Routes>
