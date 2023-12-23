@@ -5,7 +5,7 @@ export default function UserInfo() {
   const [user, setUser] = useState({});
   const [eventList, setEventList] = useState([]);
   const [selectedEventId, setSelectedEventId] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState(''); // message to users after they press submit
   const { id } = useParams();
 
   useEffect(() => {
@@ -29,7 +29,6 @@ export default function UserInfo() {
   const handleJoinEvent = (e) => {
     e.preventDefault();
 
-
     fetch(`/users/${id}/events_joineds`, {
       method: 'POST',
       headers: {
@@ -48,6 +47,7 @@ export default function UserInfo() {
       });
   };
 
+  // displaying user info and providing link to see events joined
   return (
     <div>
       {!user.error ? (
@@ -61,6 +61,7 @@ export default function UserInfo() {
         <p>No user found</p>
       )}
 
+      {/* allowing users to join events via form */}
       <h2>Join an Event</h2>
       <form onSubmit={handleJoinEvent}>
         <label value="events">Events</label>
