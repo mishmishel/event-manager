@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 
     def index
         users = User.all 
-
         render json: users
     end
 
@@ -41,7 +40,7 @@ class UsersController < ApplicationController
         if user
             render json: user, status: :ok
         else
-            render json: { error: "Unauthorized"}, status: :not_authorized
+            render json: { error: "Unauthorized"}, status: :unauthorized
         end
     end
 
