@@ -10,16 +10,30 @@ import EventsJoined from './components/EventsJoined';
 import Comments from './components/Comments';
 import NewEvent from './components/NewEvent';
 import Login from './components/Login';
+import Logout from './components/Logout'; 
 
 function App() {
 
   const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    fetch('/me')
+    .then(response => {
+      if (response.ok) {
+        response.json()
+        .then(json => setUser(json))
+      }
+    })
+  }, [])
+
   return (
     <div>
-      {user
+      {user 
     ?
-      <h1>Welcome back, {user.username}!</h1>
+      <React.Fragment>
+        <h1>Welcome back, {user.username}!</h1>
+        <Logout onLogout={() => { setUser(null)}} /> 
+      </React.Fragment>
     : 
     <Login onLogin={setUser} />
     }

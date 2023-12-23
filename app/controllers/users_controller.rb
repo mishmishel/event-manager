@@ -35,6 +35,16 @@ class UsersController < ApplicationController
         end
     end
 
+    def me 
+        user = User.find_by(id: session[:user_id])
+
+        if user
+            render json: user, status: :ok
+        else
+            render json: { error: "Unauthorized"}, status: :not_authorized
+        end
+    end
+
     private 
 
     def user_params
