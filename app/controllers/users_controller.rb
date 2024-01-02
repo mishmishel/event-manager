@@ -17,12 +17,11 @@ class UsersController < ApplicationController
 
     def create
         user = User.create!(user_params)
-
+        
         session[:user_id] = user.id
-
+        
         render json: user.to_json(except: [:created_at, :updated_at, :id]), status: :created
-    
-        rescue ActiveRecord::RecordInvalid => invalid 
+    rescue ActiveRecord::RecordInvalid => invalid
         render json: { errors: invalid.record.errors }, status: :unprocessable_entity
     end
 
@@ -51,7 +50,7 @@ class UsersController < ApplicationController
 
     def user_params
         # Permitting params
-        allowed_params = params.permit(:id, :password, :first_name, :last_name, :username)
+        allowed_params = params.permit(:id, :password, :password_confirmation, :first_name, :last_name, :username)
     end
 
     def render_record_not_found
