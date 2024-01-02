@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # PATCH to update events
   patch "/events/:id/interest", to: "events#update_interest"
 
-  resources :users, only: [:index, :create, :destroy]
+  resources :users, only: [:index, :destroy]
 
   # /user/user_id/events to see events create by user and also assign created events to user
   resources :users, only: [:show] do 
@@ -28,5 +28,11 @@ Rails.application.routes.draw do
   get '/me', to: "users#me"
 
   delete '/logout', to: "sessions#destroy"
+
+  # user creation
+
+  post '/signup', to: "users#create"
+
 end
+
 
