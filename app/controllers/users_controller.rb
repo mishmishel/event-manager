@@ -6,12 +6,12 @@ class UsersController < ApplicationController
     end
 
     def show
-        user = User.find_by(id: params[:id])
+        user = User.find_by(id: session[:user_id])
 
         if user
             render json: user.to_json(except: [:created_at, :updated_at, :id, :password], include: { events: { only: [:title, :date] }})
         else
-            render_record_not_found
+            render json: { error: "Unauthorized"}, status: :unauthorized
         end
     end
 

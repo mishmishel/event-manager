@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 export default function Login( { onLogin }) {
     const[usernameInput, setUsernameInput] = useState("");
+    const [passwordInput, setPasswordInput] = useState("");
     const [loginError, setLoginError] = useState(false); // to handle wrong username info
 
     function handleLogin(e) {
@@ -13,7 +14,9 @@ export default function Login( { onLogin }) {
                 "Accept": "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({username: usernameInput})
+            body: JSON.stringify({
+                username: usernameInput,
+                password: passwordInput})
         })
         .then(response => {
             if (response.ok) {
@@ -21,7 +24,7 @@ export default function Login( { onLogin }) {
               return response.json();
             } else {
               setLoginError(true);
-              throw new Error('User not found');
+              throw new Error('Invalid username and/or password');
             }
           })
           .then(json => onLogin(json))
@@ -30,10 +33,13 @@ export default function Login( { onLogin }) {
 
     return (
         <form onSubmit={handleLogin}>
-            {loginError && <p>No user found. Please try again.</p>}
+            {loginError && <p>Incorrect username or password. Please try again.</p>}
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" value={usernameInput} onChange={(e) => 
             {setUsernameInput(e.target.value)}} />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" value={passwordInput} onChange={(e) =>
+            { setPasswordInput(e.target.value) }} />
             <button type="submit">Login</button>
         </form>
     )
