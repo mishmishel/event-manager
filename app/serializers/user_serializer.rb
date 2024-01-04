@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :first_name, :username, :last_name, :events
+  attributes :id, :first_name, :username, :last_name, :events, :password, :password_confirmation
 
   def events
     object.events.map do |event|

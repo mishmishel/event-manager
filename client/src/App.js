@@ -11,6 +11,7 @@ import Comments from './components/Comments';
 import NewEvent from './components/NewEvent';
 import Login from './components/Login';
 import Logout from './components/Logout'; 
+import SignUp from './components/SignUp';
 
 function App() {
 
@@ -18,26 +19,28 @@ function App() {
 
   useEffect(() => {
     fetch('/me')
-    .then(response => {
-      if (response.ok) {
-        response.json()
-        .then(json => setUser(json))
-      }
-    })
+      .then(response => {
+        if (response.ok) {
+          response.json()
+            .then(json => setUser(json))
+        }
+      })
   }, [])
 
   return (
     <div>
-      {user 
-    ?
-      <React.Fragment>
-        <h1>Welcome back, {user.username}!</h1>
-        <Logout onLogout={() => { setUser(null)}} /> 
-      </React.Fragment>
-    : 
-    <Login onLogin={setUser} />
-    }
-    
+      {user ?
+        <React.Fragment>
+          <h1>Welcome {user.username}!</h1>
+          <Logout onLogout={() => { setUser(null) }} />
+        </React.Fragment>
+        :
+        <React.Fragment>
+          <Login onLogin={setUser} />
+          <SignUp onSignUp={setUser} /> 
+        </React.Fragment>
+      }
+
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
