@@ -11,7 +11,7 @@ class UsersController < ApplicationController
         if user
             render json: user.to_json(except: [:created_at, :updated_at, :id, :password], include: { events: { only: [:title, :date] }})
         else
-            render json: { error: "Unauthorized"}, status: :unauthorized
+            render_unauthorized
         end
     end
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
         if user
             render json: user, status: :ok
         else
-            render json: { error: "Unauthorized"}, status: :unauthorized
+            render_unauthorized
         end
     end
 
@@ -55,6 +55,10 @@ class UsersController < ApplicationController
 
     def render_record_not_found
         render json: {error: "No record found"}, status: :not_found 
+    end
+
+    def render_unauthorized
+        render json: { error: "Unauthorized"}, status: :unauthorized
     end
 
 end
