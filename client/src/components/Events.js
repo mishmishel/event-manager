@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-export default function Events() {
-    const [events, setEvents] = useState([])
+export default function Events({ user }) {
+    const [events, setEvents] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(()=> {
-        fetch('/events') // call the users endpoint in the backend
+        fetch('/events') 
         .then(response => response.json())
         .then(json => {
             setEvents(json)
         })
     }, [])
+
+    const handleCreateNewEvent = () => {
+        console.log('User:', user);
+        if (user) {
+          // if the user logged in - navigate to /events/new
+          navigate('/events/new');
+        } else {
+          // if the user not logged in - navigate to /signup
+          navigate('/signup');
+        }
+    };
 
     return (
         <div>
@@ -28,7 +40,7 @@ export default function Events() {
                 :
                 <p>No event found</p>
             }
-            < Link to="/events/new"><button>Create New Event</button></Link>
+             <button onClick={handleCreateNewEvent}>Create New Event</button>
         </div>
     )
 }

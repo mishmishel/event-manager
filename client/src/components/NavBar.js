@@ -13,9 +13,9 @@ export default function NavBar({ user }) {
     <nav>
       <ul>
         <li><Link to="/">Home</Link></li>
+        <li><Link to="/events">Events</Link></li>
         {user ? (
           <>
-            <li><Link to="/events">Events</Link></li>
             <li><Link to={`/users/${user.id}`}>User Info</Link></li>
           </>
         ) : (
