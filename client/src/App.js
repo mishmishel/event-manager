@@ -2,7 +2,7 @@ import './App.css';
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Home from './components/Home';
-import Users from './components/Users';
+// import Users from './components/Users';
 import Events from './components/Events';
 import EventInfo from './components/EventInfo';
 import UserInfo from './components/UserInfo';
@@ -44,10 +44,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/users" element={<Users />} />
+        {/* <Route path="/users" element={<Users />} /> */}
         <Route path="/events" element={<Events />} />
         <Route path="/events/:id" element={<EventInfo />} />
-        <Route path="/users/:id" element={<UserInfo />} />
+        <Route path="/users/*" element={<UserInfo userProp={user} />} />
         <Route path="/events/:id/comments" element={<Comments />} />
         <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
         <Route path="/events/new" element={<NewEvent />} />
