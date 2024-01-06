@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SignUp({ onSignUp }) {
   const [usernameInput, setUsernameInput] = useState("");
@@ -8,6 +9,8 @@ export default function SignUp({ onSignUp }) {
   const [lastNameInput, setLastNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [signUpError, setSignUpError] = useState(false);
+
+  const navigate = useNavigate();
 
   function handleSignUp(e) {
     e.preventDefault();
@@ -44,7 +47,10 @@ export default function SignUp({ onSignUp }) {
           throw new Error('Failed to create an account');
         }
       })
-      .then(json => onSignUp(json))
+      .then(json => {
+        onSignUp(json);
+        navigate('/'); // Redirect users to Home page
+      })
       .catch(error => console.error(error));
   }
 

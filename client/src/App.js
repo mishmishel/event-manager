@@ -40,7 +40,7 @@ function App() {
           ) : (
             <React.Fragment>
               <Login onLogin={setUser} />
-              <SignUp onSignUp={setUser} />
+              {/* <SignUp onSignUp={setUser} /> */}
             </React.Fragment>
           )}
 
@@ -52,6 +52,7 @@ function App() {
             <Route path="/events/:id/comments" element={<Comments />} />
             <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
             <Route path="/events/new" element={<NewEvent />} />
+            <Route path="/signup" element={<SignUp onSignUp={setUser} />} />
             <Route path="*" element={<div><p>No page found</p></div>} />
           </Routes>
         </div>
