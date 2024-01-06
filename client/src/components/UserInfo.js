@@ -58,7 +58,7 @@ export default function UserInfo({ userProp }) {
 
         </>
       ) : (
-        <p>No user found</p>
+        <p>You haven't logged in yet! Log in or Sign up to continue!</p>
       )}
 
       {/* allowing users to join events via form */}

@@ -4,6 +4,9 @@ export default function SignUp({ onSignUp }) {
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordConfirmationInput, setPasswordConfirmationInput] = useState("");
+  const [firstNameInput, setFirstNameInput] = useState("");
+  const [lastNameInput, setLastNameInput] = useState("");
+  const [emailInput, setEmailInput] = useState("");
   const [signUpError, setSignUpError] = useState(false);
 
   function handleSignUp(e) {
@@ -26,7 +29,10 @@ export default function SignUp({ onSignUp }) {
       body: JSON.stringify({
         username: usernameInput,
         password: passwordInput,
-        password_confirmation: passwordConfirmationInput
+        password_confirmation: passwordConfirmationInput,
+        first_name: firstNameInput,
+        last_name: lastNameInput,
+        email: emailInput,
       })
     })
       .then(response => {
@@ -48,6 +54,15 @@ export default function SignUp({ onSignUp }) {
       <label htmlFor="username">Username:</label>
       <input type="text" id="username" name="username" value={usernameInput} onChange={(e) =>
         { setUsernameInput(e.target.value) }} />
+         <label htmlFor="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" value={firstNameInput} onChange={(e) =>
+        { setFirstNameInput(e.target.value) }} />
+      <label htmlFor="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" value={lastNameInput} onChange={(e) =>
+        { setLastNameInput(e.target.value) }} />
+      <label htmlFor="email">Email:</label>
+      <input type="text" id="email" name="email" value={emailInput} onChange={(e) =>
+        { setEmailInput(e.target.value) }} />
       <label htmlFor="password">Password:</label>
       <input type="password" id="password" name="password" value={passwordInput} onChange={(e) =>
         { setPasswordInput(e.target.value) }} />
