@@ -20,7 +20,7 @@ export default function Events({ user }) {
           navigate('/events/new');
         } else {
           // if the user not logged in - navigate to /signup
-          navigate('/signup');
+          navigate('/getloggedon');
         }
     };
 
