@@ -1,9 +1,12 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login( { onLogin }) {
     const[usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
     const [loginError, setLoginError] = useState(false); // to handle wrong username info
+
+    const navigate = useNavigate();
 
     function handleLogin(e) {
         e.preventDefault();
@@ -27,7 +30,10 @@ export default function Login( { onLogin }) {
               throw new Error('Invalid username and/or password');
             }
           })
-          .then(json => onLogin(json))
+          .then(json => {
+            onLogin(json);
+            navigate('/'); // redirect users to home page
+          })
           .catch(error => console.error(error));
     }
 

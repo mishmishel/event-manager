@@ -51,7 +51,12 @@ export default function SignUp({ onSignUp }) {
         onSignUp(json);
         navigate('/'); // Redirect users to Home page
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error("Error creating an account:", error);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+        }
+      });
   }
 
   return (
