@@ -9,7 +9,7 @@ import UserInfo from './components/UserInfo';
 import EventsJoined from './components/EventsJoined';
 import Comments from './components/Comments';
 import NewEvent from './components/NewEvent';
-import Login from './components/Login';
+import LoginSignUpPage from './components/LoginSignUpPage';
 import Logout from './components/Logout'; 
 import SignUp from './components/SignUp';
 import NavBar from './components/NavBar';
@@ -39,7 +39,7 @@ function App() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              <Login onLogin={setUser} />
+              {/* <Login onLogin={setUser} /> */}
               {/* <SignUp onSignUp={setUser} /> */}
             </React.Fragment>
           )}
@@ -53,6 +53,7 @@ function App() {
             <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
             <Route path="/events/new" element={<NewEvent />} />
             <Route path="/signup" element={<SignUp onSignUp={setUser} />} />
+            <Route path="/getloggedon" element={<LoginSignUpPage onSignUp={setUser} onLogin={setUser} />} />
             <Route path="*" element={<div><p>No page found</p></div>} />
           </Routes>
         </div>

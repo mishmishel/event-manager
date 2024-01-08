@@ -50,7 +50,7 @@ class UsersController < ApplicationController
 
     def user_params
         # Permitting params
-        allowed_params = params.permit(:id, :password, :password_confirmation, :first_name, :last_name, :username)
+        params.permit(:id, :password, :password_confirmation, :first_name, :last_name, :username, :email)
     end
 
     def render_record_not_found
