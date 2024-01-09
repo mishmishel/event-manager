@@ -33,6 +33,10 @@ Rails.application.routes.draw do
 
   post '/signup', to: "users#create"
 
+  # checking username uniqueness
+
+  get '/check-username', to: 'users#check_username'
+
 end
 
 

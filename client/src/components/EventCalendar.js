@@ -13,8 +13,11 @@ export default function EventCalendar({ events }) {
   return (
     <div>
       <h2>Events Calendar</h2>
-      <Calendar onChange={onChange} value={date} />
-      <h3>Events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
+      {/* Calendar Itself */}
+      <Calendar onChange={onChange} value={date} /> 
+
+      {/* Displays events for current month  */}
+      <h3>Events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3> 
       <ul>
         {events
           .filter((event) => {

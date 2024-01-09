@@ -16,15 +16,17 @@ class UsersController < ApplicationController
     end
 
     def create
-        user = User.create!(user_params)
-        
-        session[:user_id] = user.id
-        
-        render json: user.to_json(except: [:created_at, :updated_at, :id]), status: :created
-    rescue ActiveRecord::RecordInvalid => invalid
-        render json: { errors: invalid.record.errors }, status: :unprocessable_entity
+        if User.exists?(username: params[:username])
+            render json: { errors: ["Username is already taken. Please choose a different one."] }, status: :unprocessable_entity
+          else
+            user = User.create!(user_params)
+            session[:user_id] = user.id
+            render json: user.to_json(except: [:created_at, :updated_at, :id, :password], status: :created)
+          end
+        rescue ActiveRecord::RecordInvalid => invalid
+          render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity   
     end
-
+    
     def destroy
         user = User.find_by(id: params[:id])
 
@@ -44,6 +46,13 @@ class UsersController < ApplicationController
         else
             render_unauthorized
         end
+    end
+
+    def check_username
+        username = params[:username]
+        user = User.find_by(username: username)
+      
+        render json: { exists: user.present? }
     end
 
     private 

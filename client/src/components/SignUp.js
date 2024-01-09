@@ -18,11 +18,6 @@ export default function SignUp({ onSignUp }) {
     console.log("Password Input:", passwordInput);
     console.log("Password Confirmation Input:", passwordConfirmationInput);
 
-    if (passwordInput !== passwordConfirmationInput) {
-      setSignUpError(true);
-      return;
-    }
-
     fetch('/signup', {
       method: "POST",
       headers: {
@@ -43,8 +38,20 @@ export default function SignUp({ onSignUp }) {
           setSignUpError(false);
           return response.json();
         } else {
-          setSignUpError(true);
-          throw new Error('Failed to create an account');
+          return response.json().then(data => {
+            console.log(data);
+            if (data.errors && Array.isArray(data.errors) && data.errors.includes('Username is already taken. Please choose a different one.')) {
+              console.log(data.errors)
+              setSignUpError('Username is already taken. Please choose a different one.');
+            } else if (passwordInput.length  < 6) {
+              setSignUpError('Password is too short. Please use at least 6 characters.');
+            } else if (passwordInput !== passwordConfirmationInput){
+              setSignUpError('Passwords do not match. Please try re-entering passwords');
+            } else {
+              setSignUpError('Failed to create an account');
+            }
+            throw new Error('Failed to create an account');
+          });
         }
       })
       .then(json => {
@@ -61,7 +68,7 @@ export default function SignUp({ onSignUp }) {
 
   return (
     <form onSubmit={handleSignUp}>
-      {signUpError && <p>Passwords do not match. Please try again.</p>}
+      {signUpError && <p>{signUpError}</p>}
       <label htmlFor="username">Username:</label>
       <input type="text" id="username" name="username" value={usernameInput} onChange={(e) =>
         { setUsernameInput(e.target.value) }} />
