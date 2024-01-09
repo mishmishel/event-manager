@@ -40,7 +40,7 @@ export default function SignUp({ onSignUp }) {
         } else {
           return response.json().then(data => {
             console.log(data);
-            if (data.errors && Array.isArray(data.errors) && data.errors.includes('Username is already taken. Please choose a different one.')) {
+            if (data.errors && data.errors.includes('Username is already taken. Please choose a different one.')) {
               console.log(data.errors)
               setSignUpError('Username is already taken. Please choose a different one.');
             } else if (passwordInput.length  < 6) {
