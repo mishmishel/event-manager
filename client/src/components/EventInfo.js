@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
-export default function EventInfo({user}) {
+export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("Event ID:", id);
@@ -19,22 +20,28 @@ export default function EventInfo({user}) {
   // allowing users to join events when they press join button
 
   const handleJoinEvent = () => {
-    fetch(`/users/${user.id}/events_joineds`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ event_id: id }),
-    })
-      .then(response => response.json())
-      .then(json => {
-        console.log("Join Event Response:", json);
-        if (json.status === 'Joined successfully') {
-          setSuccessMessage('Successfully joined the event!');
-        } else {
-          setSuccessMessage('Failed to join the event. Perhaps you have already joined?');
-        }
-      });
+    if (user) {
+      // if user is logged allows them to join event
+      fetch(`/users/${user.id}/events_joineds`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ event_id: id }),
+      })
+        .then(response => response.json())
+        .then(json => {
+          console.log("Join Event Response:", json);
+          if (json.status === 'Joined successfully') {
+            setSuccessMessage('Successfully joined the event!');
+          } else {
+            setSuccessMessage('Failed to join the event. Perhaps you have already joined?');
+          }
+        });
+    } else {
+      // if user not logged in then get taken to login/signup page
+      navigate('/getloggedon');
+    }
   };
 
   return (
