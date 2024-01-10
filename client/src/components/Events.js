@@ -40,7 +40,9 @@ export default function Events({ user }) {
                 :
                 <p>No event found</p>
             }
-             <button onClick={handleCreateNewEvent}>Create New Event</button>
+             <button onClick={handleCreateNewEvent}> 
+             {user ? 'Create New Event' : 'Sign Up'}
+             </button>
         </div>
     )
 }
