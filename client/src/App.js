@@ -48,8 +48,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/events" element={<Events user={user} />} />
             <Route path="/events/:id" element={<EventInfo user={user}/>} />
-            <Route path="/users/:id" element={<UserInfo userProp={user} />} />
-            <Route path="/events/:id/comments" element={<Comments />} />
+            <Route path="/users/:id" element={<UserInfo />} />
+            <Route path="/events/:id/comments" element={<Comments user={user}/>} />
             <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
             <Route path="/events/new" element={<NewEvent />} />
             <Route path="/signup" element={<SignUp onSignUp={setUser} />} />
