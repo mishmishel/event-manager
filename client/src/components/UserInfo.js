@@ -1,86 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-export default function UserInfo({ userProp }) {
+export default function UserInfo() {
   const [user, setUser] = useState({});
-  const [eventList, setEventList] = useState([]);
-  const [selectedEventId, setSelectedEventId] = useState('');
-  const [successMessage, setSuccessMessage] = useState(''); // message to users after they press submit
+  const [eventsJoined, setEventsJoined] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
     console.log("User ID:", id);
-    fetch('/users/' + id)
+
+    fetch(`/users/${id}`)
       .then(response => response.json())
       .then(json => {
         console.log("User data:", json);
         setUser(json);
+
+        // fetch events joined by user
+        fetch(`/users/${id}/events_joineds`)
+          .then(response => response.json())
+          .then(events => {
+            console.log("Events joined:", events);
+            setEventsJoined(events);
+          });
       });
   }, [id]);
 
-  useEffect(() => {
-    fetch('/events')
-      .then(response => response.json())
-      .then(json => {
-        setEventList(json);
-      });
-  }, []);
-
-  const handleJoinEvent = (e) => {
-    e.preventDefault();
-
-    fetch(`/users/${id}/events_joineds`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ event_id: selectedEventId }),
-    })
-      .then(response => response.json())
-      .then(json => {
-        console.log("Join Event Response:", json);
-        if (json.status === 'Joined successfully') {
-          setSuccessMessage('Successfully joined the event!');
-        } else {
-          setSuccessMessage('Failed to join the event. Perhaps you have already joined?');
-        }
-      });
-  };
-
-  // displaying user info and providing link to see events joined
   return (
     <div>
       {!user.error ? (
         <>
           <h1>{user.first_name} {user.last_name}</h1>
 
-          <Link to={`/users/${id}/events_joineds`}>Events Joined</Link>
-
+          <h2>Events Joined</h2>
+          <ul>
+            {eventsJoined.map((event, index) => (
+              <li key={index}>{event.event_title} - {event.event_date}</li>
+            ))}
+          </ul>
         </>
       ) : (
         <p>You haven't logged in yet! Log in or Sign up to continue!</p>
       )}
-
-      {/* allowing users to join events via form */}
-      <h2>Join an Event</h2>
-      <form onSubmit={handleJoinEvent}>
-        <label value="events">Events</label>
-        <select
-          id="events"
-          value={selectedEventId}
-          onChange={(e) => setSelectedEventId(e.target.value)}
-        >
-          <option value="">Select an event</option>
-          {eventList.map(event => (
-            <option key={event.id} value={event.id}>
-              {event.title}
-            </option>
-          ))}
-        </select>
-        <button type="submit">Join Event</button>
-      </form>
-
-      {successMessage && <p>{successMessage}</p>}
     </div>
   );
 }
