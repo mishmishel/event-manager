@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function UserInfo() {
   const [user, setUser] = useState({});
   const [eventsJoined, setEventsJoined] = useState([]);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log("User ID:", id);
@@ -25,8 +26,14 @@ export default function UserInfo() {
       });
   }, [id]);
 
+  const handleBack = () => {
+    navigate('/');
+  };
+
   return (
     <div>
+      <button onClick={handleBack}>Back</button>
+
       {!user.error ? (
         <>
           <h1>{user.first_name} {user.last_name}</h1>

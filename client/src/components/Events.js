@@ -24,6 +24,10 @@ export default function Events({ user }) {
         }
     };
 
+    const handleBack = () => {
+        navigate('/');
+    };
+
     return (
         <div>
             <h1>Events Page</h1>
@@ -43,6 +47,8 @@ export default function Events({ user }) {
              <button onClick={handleCreateNewEvent}> 
              {user ? 'Create New Event' : 'Sign Up'}
              </button>
+
+             <button onClick={handleBack}>Back</button>
         </div>
     )
 }

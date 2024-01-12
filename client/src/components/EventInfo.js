@@ -45,6 +45,11 @@ export default function EventInfo({ user }) {
     }
   };
 
+  const handleBack = () => {
+    // navigate back to the /events page
+    navigate('/events');
+  };
+
   return (
     <div>
       {!event.error ? (
@@ -56,6 +61,7 @@ export default function EventInfo({ user }) {
           <button onClick={handleJoinEvent}>Join Event</button>
           {successMessage && <p>{successMessage}</p>}
 
+          <button onClick={handleBack}>Back</button>
         </>
       ) : (
         <p>No event found</p>
