@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 export default function UserInfo() {
   const [user, setUser] = useState({});
@@ -40,8 +40,8 @@ export default function UserInfo() {
 
           <h2>Events Joined</h2>
           <ul>
-            {eventsJoined.map((event, index) => (
-              <li key={index}>{event.event_title} - {event.event_date}</li>
+            {eventsJoined.map((event) => (
+              <li key={event.event_id}><Link to={`/events/${event.event_id}`}>{event.event_title} - {event.event_date}</Link></li>
             ))}
           </ul>
         </>
