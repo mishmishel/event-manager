@@ -77,7 +77,6 @@ export default function Comments( { user } ) {
 
     {comments.length > 0 ? (
       <>
-        <h1>Comments</h1>
         <ul>
           {comments.map((comment, index) => (
             <li key={index}>{comment.text} - {comment.user.username}</li>

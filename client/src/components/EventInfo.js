@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import Comments from './Comments';
 
 export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
@@ -55,11 +56,13 @@ export default function EventInfo({ user }) {
           <button onClick={handleJoinEvent}>Join Event</button>
           {successMessage && <p>{successMessage}</p>}
 
-          <Link to={`/events/${id}/comments`}>View Comments</Link>
         </>
       ) : (
         <p>No event found</p>
       )}
+
+      <h2>Comments</h2>
+      <Comments user={user}/>
     </div>
   );
 }
