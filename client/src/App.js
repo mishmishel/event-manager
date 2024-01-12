@@ -53,7 +53,7 @@ function App() {
             <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
             <Route path="/events/new" element={<NewEvent />} />
             <Route path="/signup" element={<SignUp onSignUp={setUser} />} />
-            <Route path="/login" element={<LoginSignUpPage onSignUp={setUser} onLogin={setUser} />} />
+            <Route path="/login" element={<LoginSignUpPage onSignUp={setUser} onLogin={setUser} user={user}/>} />
             <Route path="*" element={<div><p>No page found</p></div>} />
           </Routes>
         </div>

@@ -1,8 +1,22 @@
-import React from 'react';
-import SignUp from './SignUp'; // Assuming the file path is correct
-import Login from './Login'; // Assuming the file path is correct
+import React, { useEffect } from 'react';
+import SignUp from './SignUp';
+import Login from './Login';
+import { useNavigate } from 'react-router-dom'
 
-export default function LoginSignUpPage({ onSignUp, onLogin }) {
+export default function LoginSignUpPage({ onSignUp, onLogin, user }) {
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
+  if (user) {
+    return null; // returns nothing if user is in session
+  }
+
   return (
     <div>
       <h2>Sign Up</h2>
@@ -13,3 +27,4 @@ export default function LoginSignUpPage({ onSignUp, onLogin }) {
     </div>
   );
 }
+
