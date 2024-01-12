@@ -23,7 +23,7 @@ export default function Comments( { user } ) {
     if (newComment.trim() !== '') {
 
       if (!user) {
-        // Redirect to login/signup page for non-authenticated users
+        // redirect to login page for non-authenticated users
         navigate('/login');
         return;
       }
@@ -44,21 +44,21 @@ export default function Comments( { user } ) {
         .then(newComment => {
           // update comments state with the new comment
           setComments(prevComments => [...prevComments, newComment]);
-          // clear newComment state after posting
+          // clear comment after posting
           setNewComment('');
         })
         .catch(error => {
-          // Handle errors, e.g., display an error message
           setCommentError('Failed to post the comment. Please try again.');
         });
     } else {
-      // Display an error message if newComment is empty
+      // display error message if newComment is empty
       setCommentError('Please enter a comment before submitting.');
     }
   };
 
   return (
     <div>
+    {user && (
       <div>
         <label htmlFor="newComment">Post a comment:</label>
         {commentError && <p>{commentError}</p>}
@@ -67,24 +67,26 @@ export default function Comments( { user } ) {
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-          <button onClick={handlePostComment}>{user ? 'Post Comment' : 'Sign Up'}</button>
-          {!user && (
-            <p>You need to <Link to="/login">sign up</Link> to post a comment.</p>
-          )}
+        <button onClick={handlePostComment}>Post Comment</button>
       </div>
+    )}
 
-      {comments.length > 0 ? (
-        <>
-          <h1>Comments</h1>
-          <ul>
-            {comments.map((comment, index) => (
-              <li key={index}>{comment.text} - {comment.user.username}</li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <p>No comments found</p>
-      )}
-    </div>
-  );
+    {!user && (
+      <p>You need to <Link to="/login">sign up</Link> to post a comment.</p>
+    )}
+
+    {comments.length > 0 ? (
+      <>
+        <h1>Comments</h1>
+        <ul>
+          {comments.map((comment, index) => (
+            <li key={index}>{comment.text} - {comment.user.username}</li>
+          ))}
+        </ul>
+      </>
+    ) : (
+      <p>No comments found</p>
+    )}
+  </div>
+)
 }
