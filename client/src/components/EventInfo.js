@@ -40,7 +40,7 @@ export default function EventInfo({ user }) {
         });
     } else {
       // if user not logged in then get taken to login/signup page
-      navigate('/getloggedon');
+      navigate('/login');
     }
   };
 

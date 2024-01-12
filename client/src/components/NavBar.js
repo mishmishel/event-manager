@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import LoginSignUpPage from './LoginSignUpPage';
 
-export default function NavBar({ user, onSignUp, onLogin }) {
+export default function NavBar({ user}) {
   const navigate = useNavigate();
   
 
   const handleSignUpClick = () => {
     // Navigate to SignUp page
-    navigate('/getloggedon');
+    navigate('/login');
   };
 
   return (

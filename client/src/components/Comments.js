@@ -24,7 +24,7 @@ export default function Comments( { user } ) {
 
       if (!user) {
         // Redirect to login/signup page for non-authenticated users
-        navigate('/getloggedon');
+        navigate('/login');
         return;
       }
 
@@ -69,7 +69,7 @@ export default function Comments( { user } ) {
         />
           <button onClick={handlePostComment}>{user ? 'Post Comment' : 'Sign Up'}</button>
           {!user && (
-            <p>You need to <Link to="/getloggedon">sign up</Link> to post a comment.</p>
+            <p>You need to <Link to="/login">sign up</Link> to post a comment.</p>
           )}
       </div>
 
