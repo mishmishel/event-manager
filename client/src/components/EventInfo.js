@@ -46,7 +46,7 @@ export default function EventInfo({ user }) {
   };
 
   const handleBack = () => {
-    // navigate back to the /events page
+    // navigate back to the /events or /users page
     navigate(-1);
   };
 

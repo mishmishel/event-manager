@@ -22,6 +22,9 @@ Rails.application.routes.draw do
     resources :events_joineds, only: [:index, :show, :create]
   end
 
+  # unjoin events route
+  delete '/unjoin/:event_id', to: "events_joineds#unjoin"
+
   # user login
   post '/login', to: "sessions#create"
 

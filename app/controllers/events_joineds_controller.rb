@@ -18,4 +18,16 @@ class EventsJoinedsController < ApplicationController
         events_joined = user.events_joined.includes(:event)
         render json: events_joined, each_serializer: EventsJoinedSerializer
     end
+
+    def unjoin
+      user = User.find_by(id: session[:user_id])
+      event = Event.find(params[:event_id])
+  
+      if user.events_joined.include?(event)
+        user.events_joined.find_by(event: event).destroy
+        render json: { status: 'Event removed successfully' }, status: :ok
+      else
+        render json: { error: 'User is not joined to the event' }, status: :unprocessable_entity
+      end
+    end
 end
