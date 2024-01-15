@@ -25,6 +25,17 @@ class CommentsController < ApplicationController
             render json: { error: "No user found" }, status: :not_found
         end
     end
+
+    def destroy
+        user = User.find_by(id: params[:user_id])
+        comment = Comment.find(params[:comment_id])
+        if comment.user_id == session[:user_id]
+          comment.destroy
+          render json: { status: 'Comment deleted successfully' }, status: :ok
+        else
+          render json: { error: 'You are not authorized to delete this comment' }, status: :unauthorized
+        end
+    end
     
     private
 

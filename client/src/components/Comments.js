@@ -56,6 +56,25 @@ export default function Comments( { user } ) {
     }
   };
 
+  const handleDeleteComment = (commentId) => {
+    console.log("Deleting comment with ID:", commentId);
+    fetch(`/delete/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log("Delete Comment Response:", json);
+        // Update the comments state to reflect the deletion
+        setComments(prevComments => prevComments.filter(comment => comment.id !== commentId));
+      })
+      .catch(error => {
+        console.error("Error during delete:", error);
+      });
+  };
+
   return (
     <div>
     {user && (
@@ -78,9 +97,16 @@ export default function Comments( { user } ) {
     {comments.length > 0 ? (
       <>
         <ul>
-          {comments.map((comment, index) => (
-            <li key={index}>{comment.text} - {comment.user.username}</li>
-          ))}
+        {comments.map((comment, index) => {
+        return (
+          <li key={index}>
+            {comment.text} - {comment.user.username}
+            {user.id === comment.user.id && (
+              <button onClick={() => handleDeleteComment(comment.id)}>X</button>
+          )}
+    </li>
+  );
+})}
         </ul>
       </>
     ) : (

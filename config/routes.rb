@@ -14,8 +14,11 @@ Rails.application.routes.draw do
   
   # /events/event_id/comments
   resources :events, only: [:show] do
-    resources :comments, only: [:index, :show, :create, :delete]
+    resources :comments, only: [:index, :show, :create]
   end
+
+  # delete comments
+  delete '/delete/:comment_id', to: "comments#destroy"
 
   # /user/user_id/events_joined
   resources :users, only: [:show] do
