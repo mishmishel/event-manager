@@ -23,7 +23,7 @@ class EventsJoinedsController < ApplicationController
       user = User.find_by(id: session[:user_id])
       event = Event.find(params[:event_id])
   
-      if user.events_joined.include?(event)
+      if user && user.events_joined.exists?(event: event)
         user.events_joined.find_by(event: event).destroy
         render json: { status: 'Event removed successfully' }, status: :ok
       else

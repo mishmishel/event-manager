@@ -5,6 +5,8 @@ import Comments from './Comments';
 export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
+  const [eventsJoined, setEventsJoined] = useState([]); 
+  const [index, setIndex] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -17,6 +19,17 @@ export default function EventInfo({ user }) {
         setEvent(json);
       });
   }, [id]);
+
+  useEffect(() => {
+    if (user) {
+      fetch(`/users/${user.id}/events_joineds`)
+        .then(response => response.json())
+        .then(json => {
+          setEventsJoined(json);
+          setIndex(0);
+        });
+    }
+  }, [user]);
 
   // allowing users to join events when they press join button
 
@@ -45,6 +58,41 @@ export default function EventInfo({ user }) {
     }
   };
 
+  const handleUnjoinEvent = () => {
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+  
+    if (eventsJoined.length === 0) {
+      setSuccessMessage('Failed to unjoin the event. Perhaps you have not joined yet?');
+      return;
+    }
+  
+    const eventId = eventsJoined[index].event_id;
+  
+    fetch(`/unjoin/${eventId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log(eventId)
+        console.log("Unjoin Event Response:", json);
+        if (json.status === 'Event removed successfully') {
+          setSuccessMessage('Successfully unjoined the event!');
+        } else {
+          setSuccessMessage('Failed to unjoin the event. Perhaps you have not joined yet?');
+        }
+      })
+      .catch(error => {
+        console.error("Error during unjoin:", error);
+        setSuccessMessage('Failed to unjoin the event. An error occurred.');
+      });
+  };
+
   const handleBack = () => {
     // navigate back to the /events or /users page
     navigate(-1);
@@ -60,6 +108,7 @@ export default function EventInfo({ user }) {
 
           <button onClick={handleJoinEvent}>Join Event</button>
           {successMessage && <p>{successMessage}</p>}
+          <button onClick={handleUnjoinEvent}>Unjoin Event</button>
 
           <button onClick={handleBack}>Back</button>
         </>
