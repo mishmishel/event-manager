@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import SignUp from './SignUp';
 import Login from './Login';
 import { useNavigate } from 'react-router-dom'
 
 export default function LoginSignUpPage({ onSignUp, onLogin, user }) {
-
   const navigate = useNavigate();
+  const [isLoginView, setLoginView] = useState(true);
 
   useEffect(() => {
     if (user) {
@@ -17,13 +17,23 @@ export default function LoginSignUpPage({ onSignUp, onLogin, user }) {
     return null; // returns nothing if user is in session
   }
 
+  const toggleView = () => {
+    setLoginView(prevState => !prevState);
+  };
+
   return (
     <div>
-      <h2>Sign Up</h2>
-      <SignUp onSignUp={onSignUp} />
+       <h2>{isLoginView ? 'Login' : 'Sign Up'}</h2>
+       <p>{isLoginView ? 'Welcome back! Enter your username and password to login.' : 'Welcome! Enter your details to sign up!'}</p>
+      {isLoginView ? (
+        <Login onLogin={onLogin} />
+      ) : (
+        <SignUp onSignUp={onSignUp} />
+      )}
 
-      <h2>Login</h2>
-      <Login onLogin={onLogin} />
+      <button onClick={toggleView}>
+        {isLoginView ? 'Switch to Sign Up' : 'Switch to Login'}
+      </button>
     </div>
   );
 }
