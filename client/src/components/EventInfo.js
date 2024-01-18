@@ -5,7 +5,8 @@ import Comments from './Comments';
 export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
-  const [eventsJoined, setEventsJoined] = useState([]); 
+  const [isUserJoined, setIsUserJoined] = useState(false);
+  
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -24,82 +25,47 @@ export default function EventInfo({ user }) {
       fetch(`/users/${user.id}/events_joineds`)
         .then(response => response.json())
         .then(json => {
-          setEventsJoined(json);
+          const userJoinedEventIds = json.map(event => event.event_id);
+          setIsUserJoined(userJoinedEventIds.includes(parseInt(id, 10)));
         });
     }
-  }, [user]);
+  }, [user, id]);
 
-  console.log("user:", user);
-  console.log("eventsJoined:", eventsJoined);
-  console.log("event id:", id);
-
-  const isUserJoined = user && eventsJoined.some(event => event.event_id == id);
-
-  // allowing users to join events when they press join button
-
-  const handleJoinEvent = () => {
-    if (user) {
-      // if user is logged allows them to join event
-      fetch(`/users/${user.id}/events_joineds`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ event_id: id }),
-      })
-        .then(response => response.json())
-        .then(json => {
-          console.log("Join Event Response:", json);
-          if (json.status === 'Joined successfully') {
-            setSuccessMessage('Successfully joined the event!');
-            setEventsJoined([...eventsJoined, { event_id: id }]);
-          } else {
-            setSuccessMessage('Failed to join the event. Perhaps you have already joined?');
-          }
-        });
-    } else {
-      // if user not logged in then get taken to login/signup page
-      navigate('/login');
-    }
-  };
-
-  const handleUnjoinEvent = () => {
+  const handleToggleJoin = () => {
+    // redirect to login if user not logged in
     if (!user) {
       navigate('/login');
       return;
     }
-  
-    if (eventsJoined.length === 0) {
-      setSuccessMessage('Failed to unjoin the event. Perhaps you have not joined yet?');
-      return;
-    }
-  
-    const eventUnjoin = eventsJoined.find(event => event.event_id == id);
-  
-    fetch(`/unjoin/${eventUnjoin.event_id}}`, {
-      method: 'DELETE',
+
+    // determine API endpoint based on join/unjoin
+    const endpoint = isUserJoined ? `/unjoin/${id}` : `/users/${user.id}/events_joineds`;
+
+    fetch(endpoint, {
+      method: isUserJoined ? 'DELETE' : 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: isUserJoined ? null : JSON.stringify({ event_id: id }),
     })
       .then(response => response.json())
       .then(json => {
-        console.log("Unjoin Event Response:", json);
-        if (json.status === 'Event removed successfully') {
-          setSuccessMessage('Successfully unjoined the event!');
-          setEventsJoined(eventsJoined.filter(event => event.event_id !== id));
+        console.log("Toggle Join/Unjoin Response:", json);
+        if (json.status === 'Event removed successfully' || json.status === 'Joined successfully') {
+          setSuccessMessage(isUserJoined ? 'Successfully unjoined the event!' : 'Successfully joined the event!');
+          setIsUserJoined(!isUserJoined); 
         } else {
-          setSuccessMessage('Failed to unjoin the event. Perhaps you have not joined yet?');
+          setSuccessMessage(`Failed to ${isUserJoined ? 'unjoin' : 'join'} the event.`);
         }
       })
       .catch(error => {
-        console.error("Error during unjoin:", error);
-        setSuccessMessage('Failed to unjoin the event. An error occurred.');
+        console.error(`Error during ${isUserJoined ? 'unjoin' : 'join'}:`, error);
+        setSuccessMessage(`Failed to ${isUserJoined ? 'unjoin' : 'join'} the event. An error occurred.`);
       });
   };
 
+  // navigate back to previous page
   const handleBack = () => {
-    // navigate back to the /events or /users page
     navigate(-1);
   };
 
@@ -111,11 +77,9 @@ export default function EventInfo({ user }) {
           <h2>{event.date}</h2>
           <p>{event.description}</p>
 
-          {isUserJoined ? (
-            <button onClick={handleUnjoinEvent}>Unjoin Event</button>
-          ) : (
-            <button onClick={handleJoinEvent}>Join Event</button>
-          )}
+          <button onClick={handleToggleJoin}>
+            {isUserJoined ? 'Unjoin Event' : 'Join Event'}
+          </button>
           {successMessage && <p>{successMessage}</p>}
 
           <button onClick={handleBack}>Back</button>
@@ -125,7 +89,7 @@ export default function EventInfo({ user }) {
       )}
 
       <h2>Comments</h2>
-      <Comments user={user}/>
+      <Comments user={user} />
     </div>
   );
 }
