@@ -31,6 +31,12 @@ export default function EventInfo({ user }) {
     }
   }, [user]);
 
+  console.log("user:", user);
+  console.log("eventsJoined:", eventsJoined);
+  console.log("event id:", id);
+
+  const isUserJoined = user && eventsJoined.some(event => event.event_id == id);
+
   // allowing users to join events when they press join button
 
   const handleJoinEvent = () => {
@@ -106,9 +112,12 @@ export default function EventInfo({ user }) {
           <h2>{event.date}</h2>
           <p>{event.description}</p>
 
-          <button onClick={handleJoinEvent}>Join Event</button>
+          {isUserJoined ? (
+            <button onClick={handleUnjoinEvent}>Unjoin Event</button>
+          ) : (
+            <button onClick={handleJoinEvent}>Join Event</button>
+          )}
           {successMessage && <p>{successMessage}</p>}
-          <button onClick={handleUnjoinEvent}>Unjoin Event</button>
 
           <button onClick={handleBack}>Back</button>
         </>

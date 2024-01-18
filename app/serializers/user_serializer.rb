@@ -14,9 +14,10 @@ class UserSerializer < ActiveModel::Serializer
   def events_joineds
     object.events_joineds.map do |events_joined|
       {
-        title: event.title,
-        date: event.date,
-        description: event.description
+        id: event_joined.id,
+        title: event_joined.title,
+        date: event_joined.date,
+        description: event_joined.description
       }
     end
   end
