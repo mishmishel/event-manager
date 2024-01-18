@@ -6,7 +6,6 @@ export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [eventsJoined, setEventsJoined] = useState([]); 
-  const [index, setIndex] = useState(0);
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -26,7 +25,6 @@ export default function EventInfo({ user }) {
         .then(response => response.json())
         .then(json => {
           setEventsJoined(json);
-          setIndex(0);
         });
     }
   }, [user]);
@@ -54,6 +52,7 @@ export default function EventInfo({ user }) {
           console.log("Join Event Response:", json);
           if (json.status === 'Joined successfully') {
             setSuccessMessage('Successfully joined the event!');
+            setEventsJoined([...eventsJoined, { event_id: id }]);
           } else {
             setSuccessMessage('Failed to join the event. Perhaps you have already joined?');
           }
@@ -75,9 +74,9 @@ export default function EventInfo({ user }) {
       return;
     }
   
-    const eventId = eventsJoined[index].event_id;
+    const eventUnjoin = eventsJoined.find(event => event.event_id == id);
   
-    fetch(`/unjoin/${eventId}`, {
+    fetch(`/unjoin/${eventUnjoin.event_id}}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
@@ -85,10 +84,10 @@ export default function EventInfo({ user }) {
     })
       .then(response => response.json())
       .then(json => {
-        console.log(eventId)
         console.log("Unjoin Event Response:", json);
         if (json.status === 'Event removed successfully') {
           setSuccessMessage('Successfully unjoined the event!');
+          setEventsJoined(eventsJoined.filter(event => event.event_id !== id));
         } else {
           setSuccessMessage('Failed to unjoin the event. Perhaps you have not joined yet?');
         }
