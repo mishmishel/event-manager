@@ -36,8 +36,7 @@ export default function EventCalendar({ events }) {
   };
 
   const tileContent = ({ date, view }) => {
-
-    if (view === 'month' && showWholeMonth) {
+    if (view === 'month') {
       const eventsForDate = events.filter((event) => {
         const eventDate = new Date(event.date);
         return (
@@ -46,7 +45,7 @@ export default function EventCalendar({ events }) {
           eventDate.getDate() === date.getDate()
         );
       });
-
+  
       if (eventsForDate.length > 0) {
         return (
           <ul>
@@ -57,9 +56,10 @@ export default function EventCalendar({ events }) {
         );
       }
     }
-
+  
     return null;
   };
+  
 
   const onChange = (newDate) => {
     setDate(newDate);
