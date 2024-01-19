@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 
@@ -85,7 +86,7 @@ export default function EventCalendar({ events }) {
       {filteredEvents.length > 0 ? (
         <ul>
           {filteredEvents.map((event) => (
-            <li key={event.id}>{event.title} - {event.date}</li>
+            <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} - {event.date}</Link></li>
           ))}
         </ul>
       ) : (
