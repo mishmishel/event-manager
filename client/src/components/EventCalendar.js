@@ -8,14 +8,12 @@ export default function EventCalendar({ events }) {
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [showWholeMonth, setShowWholeMonth] = useState(true);
 
+  // whenever there is change in date
   useEffect(() => {
     filterEvents();
   }, [date, events, showWholeMonth]);
 
   const filterEvents = () => {
-    console.log('Selected Date:', date);
-    console.log('All Events:', events);
-
     // filter events based on the selected date / month
     const filtered = events.filter((event) => {
       const eventDate = new Date(event.date);
@@ -34,26 +32,46 @@ export default function EventCalendar({ events }) {
       }
     });
 
-    console.log('Filtered Events:', filtered);
     setFilteredEvents(filtered);
+  };
+
+  const tileContent = ({ date, view }) => {
+
+    if (view === 'month' && showWholeMonth) {
+      const eventsForDate = events.filter((event) => {
+        const eventDate = new Date(event.date);
+        return (
+          eventDate.getFullYear() === date.getFullYear() &&
+          eventDate.getMonth() === date.getMonth() &&
+          eventDate.getDate() === date.getDate()
+        );
+      });
+
+      if (eventsForDate.length > 0) {
+        return (
+          <ul>
+            {eventsForDate.map((event) => (
+              <li key={event.id}>{event.title}</li>
+            ))}
+          </ul>
+        );
+      }
+    }
+
+    return null;
   };
 
   const onChange = (newDate) => {
     setDate(newDate);
-    console.log(newDate);
-
-    // notify parent component of selected date
     filterEvents();
   };
 
   const onClickMonth = (newDate) => {
     setDate(newDate);
-    console.log(newDate);
   };
 
   const onActiveStartDateChange = ({ activeStartDate }) => {
     setDate(activeStartDate);
-    console.log(activeStartDate);
   };
 
   const toggleView = () => {
@@ -69,6 +87,7 @@ export default function EventCalendar({ events }) {
         onClickMonth={onClickMonth}
         onActiveStartDateChange={onActiveStartDateChange}
         value={date}
+        tileContent={tileContent}
       />
 
       {/* toggle between viewing options */}
@@ -76,7 +95,6 @@ export default function EventCalendar({ events }) {
         {showWholeMonth ? 'View Events for Specific Date' : 'View Events for Whole Month'}
       </button>
 
-      {/* displays events for selected date / month */}
       {showWholeMonth ? (
         <h3>Events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
       ) : (

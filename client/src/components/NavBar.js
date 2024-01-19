@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import './NavBar.css';
+<script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
 
 export default function NavBar({ user}) {
   const navigate = useNavigate();
@@ -11,7 +13,9 @@ export default function NavBar({ user}) {
   };
 
   return (
+    <body>
     <nav>
+      <label class="logo">Sydney Street Dance Events</label>
       <ul>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/events">Events</Link></li>
@@ -25,5 +29,6 @@ export default function NavBar({ user}) {
       </ul>
       
     </nav>
+    </body>
   );
 }
