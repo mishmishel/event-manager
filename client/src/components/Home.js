@@ -19,7 +19,6 @@ export default function Home() {
     
     return (
         <div>
-            <h1>Welcome to Streetdance Event Manager</h1>
             <EventCalendar events={events} selectedMonth={selectedMonth} onDateChange={handleDateChange}/>
         </div>
     )

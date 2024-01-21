@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import './EventCalendar.css';
 
 export default function EventCalendar({ events }) {
   const [date, setDate] = useState(new Date());
@@ -79,8 +80,7 @@ export default function EventCalendar({ events }) {
   };
 
   return (
-    <div>
-      <h2>Events Calendar</h2>
+    <div className='container'>
       {/* Calendar itself */}
       <Calendar
         onChange={onChange}
