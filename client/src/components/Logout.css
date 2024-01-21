@@ -2,5 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Optional: Adjust the height based on your layout */
+}
+
+.button-container button {
+    border-radius: 5px;
+    padding: 3px;
+    background-color: aquamarine;
+    border-color: aquamarine;
+    color: white;
 }

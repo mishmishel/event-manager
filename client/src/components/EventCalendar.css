@@ -11,12 +11,27 @@
     max-height: 1000px;
     width: 100%;
     height: 100%;
+    margin-top: 20px;
     padding-bottom: 20px;
     border-radius: 10px; 
     background-color: #f0f0f0; 
     border: 4px solid #9EFF6A;
   }
-  
+
+  .react-calendar__tile--active {
+    background-color: #4DEAB6; /* Set background color for active days */
+    color: white;
+  }
+
+  .react-calendar__navigation button {
+    background-color: #9EFF6A;
+    color: rgb(145, 145, 145); 
+  }
+
+  .react-calendar__navigation button:hover {
+    background-color: #4DEAB6;
+  }
+
   h2 {
     text-align: center;
   }
