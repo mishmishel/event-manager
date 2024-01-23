@@ -80,8 +80,12 @@ export default function EventCalendar({ events }) {
   };
 
   return (
-    <div className='container'>
+    <div>
+      <p>View Sydney Street Dance events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })} below.</p>
+
+    <div className="container">
       {/* Calendar itself */}
+      <div className="calendar-section">
       <Calendar
         onChange={onChange}
         onClickMonth={onClickMonth}
@@ -89,14 +93,16 @@ export default function EventCalendar({ events }) {
         value={date}
         tileContent={tileContent}
       />
+      </div>
 
+      <div className="events-section">
       {/* toggle between viewing options */}
-      <button onClick={toggleView}>
+      <button className="toggle-view" onClick={toggleView}>
         {showWholeMonth ? 'View Events for Specific Date' : 'View Events for Whole Month'}
       </button>
 
       {showWholeMonth ? (
-        <h3>Events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
+        <h3>Events in {date.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
       ) : (
         <h3>Events for {date.toLocaleString('default', { month: 'long', year: 'numeric', day: 'numeric' })}</h3>
       )}
@@ -104,12 +110,14 @@ export default function EventCalendar({ events }) {
       {filteredEvents.length > 0 ? (
         <ul>
           {filteredEvents.map((event) => (
-            <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} - {event.date}</Link></li>
+            <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} on {event.date}</Link></li>
           ))}
         </ul>
       ) : (
         <p>No events on {date.toLocaleString('default', { month: 'long', year: 'numeric', day: 'numeric' })}</p>
       )}
+      </div>
+    </div>
     </div>
   );
 }

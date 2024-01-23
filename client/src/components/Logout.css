@@ -5,9 +5,15 @@
 }
 
 .button-container button {
+    margin-top: 10px;
+    border: none;
     border-radius: 5px;
-    padding: 3px;
-    background-color: aquamarine;
-    border-color: aquamarine;
-    color: white;
+    padding: 4px;
+    background-color: #d5ffc6;
+    color: rgb(145, 145, 145);
+    cursor: pointer; 
+}
+
+.button-container button:hover {
+    background-color: #C1FFE3;
 }
