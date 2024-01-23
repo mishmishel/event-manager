@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import SignUp from './SignUp';
 import Login from './Login';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import './LoginSignUpPage.css';
 
 export default function LoginSignUpPage({ onSignUp, onLogin, user }) {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function LoginSignUpPage({ onSignUp, onLogin, user }) {
   };
 
   return (
-    <div>
+    <div className="login-signup-view">
        <h2>{isLoginView ? 'Login' : 'Sign Up'}</h2>
        <p>{isLoginView ? 'Welcome back! Enter your username and password to login.' : 'Welcome! Enter your details to sign up!'}</p>
       {isLoginView ? (
@@ -30,9 +31,8 @@ export default function LoginSignUpPage({ onSignUp, onLogin, user }) {
       ) : (
         <SignUp onSignUp={onSignUp} />
       )}
-
-      <button onClick={toggleView}>
-        {isLoginView ? 'Switch to Sign Up' : 'Switch to Login'}
+      <button id="toggleview" onClick={toggleView}>
+      {isLoginView ? 'Switch to Sign Up' : 'Switch to Login'}
       </button>
     </div>
   );

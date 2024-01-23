@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Login.css';
 
 export default function Login( { onLogin }) {
     const[usernameInput, setUsernameInput] = useState("");
@@ -46,7 +47,9 @@ export default function Login( { onLogin }) {
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" value={passwordInput} onChange={(e) =>
             { setPasswordInput(e.target.value) }} />
+            <div className="login-button">
             <button type="submit">Login</button>
+            </div>
         </form>
     )
 }

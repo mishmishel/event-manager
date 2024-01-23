@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './SignUp.css';
 
 export default function SignUp({ onSignUp }) {
   const [usernameInput, setUsernameInput] = useState("");
@@ -87,7 +88,9 @@ export default function SignUp({ onSignUp }) {
       <label htmlFor="passwordconfirmation">Retype Password:</label>
       <input type="password" id="passwordconfirmation" name="passwordconfirmation" value={passwordConfirmationInput} onChange={(e) =>
         { setPasswordConfirmationInput(e.target.value) }} />
-      <button type="submit">Sign Up</button>
+        <div className="signup-button-container">
+        <button type="submit">Sign Up</button>
+        </div>
     </form>
   )
 }
