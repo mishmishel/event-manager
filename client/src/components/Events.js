@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import './Events.css';
 
 export default function Events({ user }) {
     const [events, setEvents] = useState([]);
@@ -29,26 +30,25 @@ export default function Events({ user }) {
     };
 
     return (
-        <div>
-            <h1>Events Page</h1>
-            {
-                events.length > 0 
-                ?
-                <ul>
-                    {
-                    events.map(event => (
-                        <li><Link to={`/events/${event.id}`}>{event.title} {event.date}</Link></li>
-                    ))
-                    }
-                </ul>
-                :
-                <p>No event found</p>
-            }
-             <button onClick={handleCreateNewEvent}> 
-             {user ? 'Create New Event' : 'Sign Up'}
-             </button>
+    <div>
+      <h1>Events Page</h1>
+      <button className="create-event-button" onClick={handleCreateNewEvent}>
+        {user ? 'Create New Event' : 'Sign Up'}
+      </button>
 
-             <button onClick={handleBack}>Back</button>
-        </div>
-    )
+      <div className="events-container">
+        {events.length > 0 ? (
+          events.map((event) => (
+            <Link to={`/events/${event.id}`} className="event-card" key={event.id}>
+              <h3>{event.title}</h3>
+              <p className="event-date">{event.date}</p>
+            </Link>
+          ))
+        ) : (
+          <p>No event found</p>
+        )}
+      </div>
+        <button className="back-button" onClick={handleBack}>Back</button>
+    </div>
+  );
 }

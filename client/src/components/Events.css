@@ -1,0 +1,69 @@
+/* Container for the Events component */
+h1 {
+    margin-bottom: 20px;
+}
+
+.events-container {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
+  }
+  
+  /* Style for each event card */
+  .event-card {
+    width: calc(25% - 10px); /* Adjust width and spacing as needed */
+    margin: 10px;
+    padding: 15px;
+    border: 4px solid #d5ffc6;
+    border-radius: 10px;
+    background-color: #fff;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+  }
+
+  .event-card:hover {
+    background-color: #d5ffc6;
+  }
+  
+  .event-card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  /* Style for the event card date */
+  .event-card .event-date {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+  
+  .create-event-button {
+    width: 200px; 
+    height: 50px; 
+    margin-top: 20px;
+    font-size: 18px;
+    background-color: #a6ffe1; /* Green color, you can change it */
+    color: rgb(145, 145, 145);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .back-button {
+    width: 100px; 
+    height: 40px; 
+    margin-top: 20px;
+    font-size: 14px;
+    background-color: #a6ffe1; /* Green color, you can change it */
+    color: rgb(145, 145, 145);
+    border: none;
+    border-radius: 8px;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    display: block;
+  }
+  

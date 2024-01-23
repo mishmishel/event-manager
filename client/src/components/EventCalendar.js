@@ -81,7 +81,7 @@ export default function EventCalendar({ events }) {
 
   return (
     <div>
-      <p>View Sydney Street Dance events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })} below.</p>
+      <p id="intro">View Sydney Street Dance events for {date.toLocaleString('default', { month: 'long', year: 'numeric' })} below.</p>
 
     <div className="container">
       {/* Calendar itself */}

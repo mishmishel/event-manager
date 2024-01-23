@@ -34,7 +34,7 @@ function App() {
         <div>
           {user ? (
             <React.Fragment>
-              <h1>Welcome {user.username}!</h1>
+              <h1 id="welcome">Welcome {user.username}!</h1>
               <Logout onLogout={() => { setUser(null) }} />
             </React.Fragment>
           ) : (
