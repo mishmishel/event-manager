@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import './Comments.css';
 
 export default function Comments( { user } ) {
   const [comments, setComments] = useState([]);
@@ -76,17 +77,18 @@ export default function Comments( { user } ) {
   };
 
   return (
-    <div>
+    <div className="comments-container">
     {user && (
       <div>
         <label htmlFor="newComment">Post a comment:</label>
         {commentError && <p>{commentError}</p>}
         <textarea
           id="newComment"
+          className="new-comment-input"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
-        <button onClick={handlePostComment}>Post Comment</button>
+        <button className="post-comment-button" onClick={handlePostComment}>Post Comment</button>
       </div>
     )}
 
@@ -96,13 +98,13 @@ export default function Comments( { user } ) {
 
     {comments.length > 0 ? (
       <>
-        <ul>
+        <ul className="comments-list">
         {comments.map((comment, index) => {
         return (
-          <li key={index}>
+          <li key={index} className="comment-item">
             {comment.text} - {comment.user.username}
             {user.id === comment.user.id && (
-              <button onClick={() => handleDeleteComment(comment.id)}>X</button>
+              <button className="delete-comment-button" onClick={() => handleDeleteComment(comment.id)}>X</button>
           )}
     </li>
   );

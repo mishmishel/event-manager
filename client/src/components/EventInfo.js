@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Comments from './Comments';
+import './EventInfo.css';
 
 export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
@@ -70,20 +71,22 @@ export default function EventInfo({ user }) {
   };
 
   return (
-    <div>
+    <div className="singular-event-container">
       {!event.error ? (
-        <>
+        <div className="event-info-card">
           <h1>{event.title}</h1>
           <h2>{event.date}</h2>
           <p>{event.description}</p>
 
+          <div className="info-button-container">
           <button onClick={handleToggleJoin}>
             {isUserJoined ? 'Unjoin Event' : 'Join Event'}
           </button>
           {successMessage && <p>{successMessage}</p>}
 
           <button onClick={handleBack}>Back</button>
-        </>
+          </div>
+        </div>
       ) : (
         <p>No event found</p>
       )}
