@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resources :events, only: [:index, :show, :create, :update, :delete]
+  resources :events, only: [:index, :show, :create, :update, :destroy]
 
   # PATCH to update events
   patch "/events/:id/interest", to: "events#update_interest"

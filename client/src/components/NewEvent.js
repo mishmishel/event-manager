@@ -1,10 +1,14 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
+import './NewEvent.css';
 
 export default function NewEvent() {
     const[title, setTitle] = useState("")
     const[date, setDate] = useState("")
     const[description, setDescription] = useState("")
     const[success, setSuccess] = useState("")
+
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -27,8 +31,12 @@ export default function NewEvent() {
         })
     }
 
+    const handleBack = () => {
+        navigate(-1);
+    };    
+
     return (
-        <div>
+        <div className='new-event-container'>
             <h1>New Event</h1>
             <form onSubmit={handleSubmit}>
                 <label for="title">Title:</label>
@@ -43,6 +51,8 @@ export default function NewEvent() {
                 <input type="submit" value="Add New Event"/>
             </form>
             <p>{success}</p>
+
+            <button className="back-button" onClick={handleBack}>Back</button>
         </div>
     )
 }
