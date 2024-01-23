@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import './UserInfo.css';
 
 export default function UserInfo() {
   const [user, setUser] = useState({});
@@ -31,9 +32,9 @@ export default function UserInfo() {
   };
 
   return (
-    <div>
-      <button onClick={handleBack}>Back</button>
+    <div className="user-info-container">
 
+      <div className="events-joined-container">
       {!user.error ? (
         <>
           <h1>{user.first_name} {user.last_name}</h1>
@@ -48,6 +49,10 @@ export default function UserInfo() {
       ) : (
         <p>You haven't logged in yet! Log in or Sign up to continue!</p>
       )}
+      </div>
+      <div className="userinfo-backbutton">
+      <button  onClick={handleBack}>Back</button>
+      </div>
     </div>
   );
 }
