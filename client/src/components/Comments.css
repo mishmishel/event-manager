@@ -1,0 +1,75 @@
+.comments-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Add this line */
+    margin-top: 20px; 
+  }  
+
+  #newComment {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  .post-comment-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .label-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .post-comment-button {
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    width: 100px;
+    border: none;
+    border-radius: 10px;
+    background-color: #a6ffe1;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .post-comment-button:hover {
+    background-color: #4DEAB6;
+  }
+
+  #newComment {
+    width: 300px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  ul li {
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  ul li button {
+    background-color: #ffabe3;
+    margin-left: 10px;
+    border-radius: 50%;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+
+  ul li button:hover {
+    background-color: #ff72d0;
+  }

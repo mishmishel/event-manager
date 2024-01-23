@@ -80,15 +80,19 @@ export default function Comments( { user } ) {
     <div className="comments-container">
     {user && (
       <div>
-        <label htmlFor="newComment">Post a comment:</label>
-        {commentError && <p>{commentError}</p>}
-        <textarea
+          <div className="label-container">
+            <label htmlFor="newComment">Post a comment:</label>
+          </div>
+          {commentError && <p>{commentError}</p>}
+          <textarea
           id="newComment"
           className="new-comment-input"
           value={newComment}
           onChange={(e) => setNewComment(e.target.value)}
         />
+         <div className="post-comment-wrapper">
         <button className="post-comment-button" onClick={handlePostComment}>Post Comment</button>
+        </div>
       </div>
     )}
 
