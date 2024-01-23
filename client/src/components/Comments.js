@@ -107,7 +107,7 @@ export default function Comments( { user } ) {
         return (
           <li key={index} className="comment-item">
             {comment.text} - {comment.user.username}
-            {user.id === comment.user.id && (
+            {user && user.id === comment.user?.id && (
               <button className="delete-comment-button" onClick={() => handleDeleteComment(comment.id)}>X</button>
           )}
     </li>
