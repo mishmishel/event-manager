@@ -21,7 +21,7 @@ class EventsController < ApplicationController
         if !event
             render_record_not_found
         else # rendering event with credit to user 
-            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { users: { only: [:first_name, :last_name] }, created_by: event.created_by})
+            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { users: { only: [:first_name, :last_name] }})
         end
     end
 

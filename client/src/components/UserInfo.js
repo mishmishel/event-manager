@@ -5,12 +5,14 @@ import './UserInfo.css';
 export default function UserInfo() {
   const [user, setUser] = useState({});
   const [eventsJoined, setEventsJoined] = useState([]);
+  const [eventsCreated, setEventsCreated] = useState([]); // state to hold events created by the user
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log("User ID:", id);
 
+    // fetch user info
     fetch(`/users/${id}`)
       .then(response => response.json())
       .then(json => {
@@ -24,6 +26,14 @@ export default function UserInfo() {
             console.log("Events joined:", events);
             setEventsJoined(events);
           });
+
+        // fetch events created by user 
+        fetch(`/users/${id}/events_created`)
+          .then(response => response.json())
+          .then(events => {
+            console.log("Events created:", events);
+            setEventsCreated(events);
+          });
       });
   }, [id]);
 
@@ -33,25 +43,31 @@ export default function UserInfo() {
 
   return (
     <div className="user-info-container">
-
       <div className="events-joined-container">
-      {!user.error ? (
-        <>
-          <h1>{user.first_name} {user.last_name}</h1>
+        {!user.error ? (
+          <>
+            <h1>{user.first_name} {user.last_name}</h1>
 
-          <h2>Events Joined</h2>
-          <ul>
-            {eventsJoined.map((event) => (
-              <li key={event.event_id}><Link to={`/events/${event.event_id}`}>{event.event_title} - {event.event_date}</Link></li>
-            ))}
-          </ul>
-        </>
-      ) : (
-        <p>You haven't logged in yet! Log in or Sign up to continue!</p>
-      )}
+            <h2>Events Joined</h2>
+            <ul>
+              {eventsJoined.map((event) => (
+                <li key={event.event_id}><Link to={`/events/${event.event_id}`}>{event.event_title} - {event.event_date}</Link></li>
+              ))}
+            </ul>
+
+            <h2>Events Created</h2>
+            <ul>
+              {eventsCreated.map((event) => (
+                <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} - {event.date}</Link></li>
+              ))}
+            </ul>
+          </>
+        ) : (
+          <p>You haven't logged in yet! Log in or Sign up to continue!</p>
+        )}
       </div>
       <div className="userinfo-backbutton">
-      <button  onClick={handleBack}>Back</button>
+        <button onClick={handleBack}>Back</button>
       </div>
     </div>
   );
