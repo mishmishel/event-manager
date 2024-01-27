@@ -40,10 +40,13 @@
     width: 80px;
     border: none;
     border-radius: 10px;
+  }
+
+  .positive-action {
     background-color: #a6ffe1;
   }
 
-  #join-unjoin-button:hover {
+  .positive-action:hover {
     background-color: #4DEAB6;
   }
 
@@ -80,4 +83,12 @@
 
   .delete-button:hover {
     background-color: #ff72d0
+  }
+
+  .negative-action {
+    background-color: #ffabe3; 
+  }
+  
+  .negative-action:hover {
+    background-color: #ff72d0; 
   }
