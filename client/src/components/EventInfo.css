@@ -37,7 +37,7 @@
   
   #join-unjoin-button {
     height: 40px;
-    width: 80px;
+    width: 95px;
     border: none;
     border-radius: 10px;
   }
@@ -92,3 +92,9 @@
   .negative-action:hover {
     background-color: #ff72d0; 
   }
+
+  #success-message {
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+

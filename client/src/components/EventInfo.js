@@ -82,12 +82,12 @@ export default function EventInfo({ user }) {
           <button id="join-unjoin-button" onClick={handleToggleJoin} className={isUserJoined ? 'negative-action' : 'positive-action'}>
             {isUserJoined ? 'Unjoin Event' : 'Join Event'}
           </button>
-          {successMessage && <p>{successMessage}</p>}
 
           <div className="back-button-container">
           <button onClick={handleBack}>Back</button>
           </div>
           </div>
+          {successMessage && <p id="success-message">{successMessage}</p>}
         </div>
       ) : (
         <p>No event found</p>
