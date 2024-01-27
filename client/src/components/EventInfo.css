@@ -12,6 +12,18 @@
     background-color: #fff;
   }
 
+  .back-button-container button {
+    height: 40px;
+    width: 80px;
+    border: none;
+    border-radius: 10px;
+    background-color: #efefef;
+  }
+
+  .back-button-container button:hover {
+    background-color: #e9e9e9;
+  }
+
   .singular-event-container p {
     text-align: center;
   }
@@ -23,7 +35,7 @@
     gap: 10px;
   }
   
-  .info-button-container button {
+  #join-unjoin-button {
     height: 40px;
     width: 80px;
     border: none;
@@ -31,7 +43,7 @@
     background-color: #a6ffe1;
   }
 
-  .info-button-container button:hover {
+  #join-unjoin-button:hover {
     background-color: #4DEAB6;
   }
 
@@ -55,4 +67,17 @@
 
   .event-info-card p {
     margin-bottom: 20px;
+  }
+
+  .delete-button {
+    margin-top: 20px;
+    height: 40px;
+    width: 90px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ffabe3;
+  }
+
+  .delete-button:hover {
+    background-color: #ff72d0
   }

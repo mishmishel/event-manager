@@ -54,7 +54,7 @@ export default function NewEvent({ user }) {
 
                 <input type="submit" value="Add New Event"/>
             </form>
-            <p>{success}</p>
+            <p id="event-was-added">{success}</p>
 
             <button className="back-button" onClick={handleBack}>Back</button>
         </div>

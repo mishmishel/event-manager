@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: center;
     height: 40px;
-    width: 100px;
+    width: 80px;
     border: none;
     border-radius: 10px;
     background-color: #a6ffe1;
@@ -51,15 +51,23 @@
   }
   
   .comments-list li {
+    display: flex;
+    justify-content: space-between; /* Align items to the left and right */
+    align-items: center;
     width: 100%;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    background-color: #efefef;
     padding: 10px;
     border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-top: 15px;
+  } 
+
+  .comment-content {
+    width: 250px;
+  }
+
+  .username {
+    font-weight: bold; 
   }
 
   ul li button {

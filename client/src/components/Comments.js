@@ -91,7 +91,7 @@ export default function Comments( { user } ) {
           onChange={(e) => setNewComment(e.target.value)}
         />
          <div className="post-comment-wrapper">
-        <button className="post-comment-button" onClick={handlePostComment}>Post Comment</button>
+        <button className="post-comment-button" onClick={handlePostComment}>Post</button>
         </div>
       </div>
     )}
@@ -102,17 +102,20 @@ export default function Comments( { user } ) {
 
     {comments.length > 0 ? (
       <>
-        <ul className="comments-list">
-        {comments.map((comment, index) => {
+       <ul className="comments-list">
+       {comments.map((comment, index) => {
         return (
-          <li key={index} className="comment-item">
-            {comment.text} - {comment.user.username}
-            {user && user.id === comment.user?.id && (
-              <button className="delete-comment-button" onClick={() => handleDeleteComment(comment.id)}>X</button>
-          )}
-    </li>
-  );
-})}
+        <li key={index} className="comment-item">
+        <div className="comment-content">
+        <div className="username">{comment.user.username}</div>
+        <div className="text">{comment.text}</div>
+        </div>
+        {user && user.id === comment.user?.id && (
+        <button className="delete-comment-button" onClick={() => handleDeleteComment(comment.id)}>X</button>
+      )}
+      </li>
+      );
+      })}
         </ul>
       </>
     ) : (

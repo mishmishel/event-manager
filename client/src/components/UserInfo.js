@@ -55,12 +55,16 @@ export default function UserInfo() {
               ))}
             </ul>
 
-            <h2>Events Created</h2>
-            <ul>
-              {eventsCreated.map((event) => (
-                <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} - {event.date}</Link></li>
-              ))}
-            </ul>
+            <h2 id="events-created">Events Created</h2>
+            {eventsCreated.length > 0 ? (
+              <ul>
+                {eventsCreated.map((event) => (
+                  <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} - {event.date}</Link></li>
+                ))}
+              </ul>
+            ) : (
+              <p id="no-events">No events created. <Link to="/events/new">Create an event</Link></p>
+            )}
           </>
         ) : (
           <p>You haven't logged in yet! Log in or Sign up to continue!</p>

@@ -79,12 +79,14 @@ export default function EventInfo({ user }) {
           <p>{event.description}</p>
 
           <div className="info-button-container">
-          <button onClick={handleToggleJoin}>
+          <button id="join-unjoin-button" onClick={handleToggleJoin}>
             {isUserJoined ? 'Unjoin Event' : 'Join Event'}
           </button>
           {successMessage && <p>{successMessage}</p>}
 
+          <div className="back-button-container">
           <button onClick={handleBack}>Back</button>
+          </div>
           </div>
         </div>
       ) : (
