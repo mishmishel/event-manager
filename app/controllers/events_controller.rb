@@ -21,14 +21,14 @@ class EventsController < ApplicationController
         if !event
             render_record_not_found
         else # rendering event with credit to user 
-            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { users: { only: [:first_name, :last_name] } })
+            render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { users: { only: [:first_name, :last_name] }, created_by: event.created_by})
         end
     end
 
     def create
         if params[:user_id]
             user = User.find_by(id: params[:user_id])
-            event = user.events.create!(event_params)
+            event = user.events.create(event_params.merge(created_by: user.id))
             render json: event.to_json(except: [:created_at, :updated_at, :id, :user_id], include: { user: { only: [:first_name, :last_name] } })
         else
             event = Event.create!(event_params)
@@ -67,10 +67,14 @@ class EventsController < ApplicationController
 
     def destroy
         event = Event.find_by(id: params[:id])
-
+        
         if event
-            event.destroy
-            render json: { status: "deleted" }
+            if event.created_by == session[:user_id] # check if user deleting event is the creator
+                event.destroy
+                render json: { status: "deleted" }
+            else
+                render json: { error: "Unauthorized to delete this event" }, status: :unauthorized
+            end
         else
             render_record_not_found
         end
@@ -80,7 +84,7 @@ class EventsController < ApplicationController
 
     def event_params
         # Permitting params
-        allowed_params = params.permit(:id, :title, :description, :date, :battle, :jam, :interest, :user_id)
+        allowed_params = params.permit(:id, :title, :description, :date, :battle, :jam, :interest, :user_id, :created_by)
 
         # Parse date string into a Date object and replace date in permitted params
         allowed_params[:date] = Date.parse(allowed_params[:date]) if allowed_params[:date].present?

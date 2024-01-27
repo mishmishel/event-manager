@@ -6,7 +6,8 @@ class UserSerializer < ActiveModel::Serializer
       {
         title: event.title,
         date: event.date,
-        description: event.description
+        description: event.description,
+        created_by: event.created_by
       }
     end
   end

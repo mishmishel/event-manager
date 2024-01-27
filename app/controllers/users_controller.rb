@@ -26,6 +26,12 @@ class UsersController < ApplicationController
         rescue ActiveRecord::RecordInvalid => invalid
           render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity   
     end
+
+    def events_created
+        user = User.find(params[:user_id])
+        events_created = Event.where(created_by: user.id)
+        render json: events_created
+    end
     
     def destroy
         user = User.find_by(id: params[:id])

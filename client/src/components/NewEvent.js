@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import './NewEvent.css';
 
-export default function NewEvent() {
+export default function NewEvent({ user }) {
     const[title, setTitle] = useState("")
     const[date, setDate] = useState("")
     const[description, setDescription] = useState("")
@@ -13,6 +13,9 @@ export default function NewEvent() {
     function handleSubmit(e) {
         e.preventDefault()
 
+        const userId = user.id;
+        console.log("User ID (created_by):", userId);
+
         fetch('/events', {
             method: "POST",
             headers: {
@@ -22,7 +25,8 @@ export default function NewEvent() {
             body: JSON.stringify({
                 title: title,
                 date: date,
-                description: description
+                description: description,
+                created_by: userId
             })
         })
         .then(response => response.json())

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # /user/user_id/events to see events create by user and also assign created events to user
   resources :users, only: [:show] do 
     resources :events, only: [:index, :create]
+    get 'events_created', to: 'users#events_created'
   end
   
   # /events/event_id/comments
