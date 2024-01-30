@@ -17,7 +17,7 @@ export default function Logout( {onLogout} ) {
     }
 
     return (
-        <div className='button-container'>
+        <div className='logout-button-container'>
             <button className="button" onClick={handleLogout}>
             Logout
             </button>

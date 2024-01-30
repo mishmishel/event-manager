@@ -13,6 +13,7 @@
   }
 
   .back-button-container button {
+    margin-top: 0px;
     margin-left: 20px;
     height: 40px;
     width: 80px;

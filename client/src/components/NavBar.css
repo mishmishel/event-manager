@@ -8,15 +8,19 @@
 }
 
 nav {
-  background: #a6ffe1;
+  background: #4DEAB6;
   height: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+#welcome-user {
+  margin-left: 600px;
+}
+
 label.logo {
-  color: rgb(145, 145, 145);
+  color: #f7f7f7;
   font-size: 35px;
   padding: 0 20px;
   font-weight: bold;
@@ -33,7 +37,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: rgb(145, 145, 145);
+  color: #f7f7f7;
   font-size: 17px;
   padding: 7px 13px;
   border-radius: 9px;
@@ -51,6 +55,19 @@ nav ul li a:hover {
   height: 30px;
   width: 30px;
   display: none;
+}
+
+#logout-button button {
+  background-color: #ffabe3;
+  height: 40px;
+  color: white;
+  width: 80px;
+  border: none;
+  border-radius: 10px;
+}
+
+#logout-button button:hover {
+  background-color: #ff72d0;
 }
 
 /* Media query for smaller screens

@@ -32,17 +32,14 @@ function App() {
         <NavBar user={user} />
 
         <div>
-          {user ? (
-            <React.Fragment>
-              <h1 id="welcome">Welcome {user.username}!</h1>
+          {/* {user ? (
+            <React.Fragment id="logout-button">
               <Logout onLogout={() => { setUser(null) }} />
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {/* <Login onLogin={setUser} /> */}
-              {/* <SignUp onSignUp={setUser} /> */}
             </React.Fragment>
-          )}
+          )} */}
 
           <Routes>
             <Route path="/" element={<Home />} />
@@ -51,7 +48,7 @@ function App() {
             <Route path="/users/:id" element={<UserInfo />} />
             <Route path="/events/:id/comments" element={<Comments user={user}/>} />
             <Route path="/users/:id/events_joineds" element={<EventsJoined />} />
-            <Route path="/events/new" element={<NewEvent user={user}/>} />
+            <Route path="/events/new" element={<NewEvent user={user} />} />
             <Route path="/signup" element={<SignUp onSignUp={setUser} />} />
             <Route path="/login" element={<LoginSignUpPage onSignUp={setUser} onLogin={setUser} user={user}/>} />
             <Route path="*" element={<div><p>No page found</p></div>} />

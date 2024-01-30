@@ -70,7 +70,7 @@
     font-weight: bold; 
   }
 
-  ul li button {
+  .delete-comment-button {
     background-color: #ffabe3;
     margin-left: 10px;
     border-radius: 50%;
