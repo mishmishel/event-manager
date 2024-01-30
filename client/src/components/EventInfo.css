@@ -72,7 +72,15 @@
     margin-bottom: 20px;
   }
 
+  .delete-event-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
   .delete-button {
+    align-items: center;
     margin-top: 20px;
     height: 40px;
     width: 90px;

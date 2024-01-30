@@ -7,6 +7,7 @@ export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [isUserJoined, setIsUserJoined] = useState(false);
+  const [isCreator, setIsCreator] = useState(false); 
   
   const { id } = useParams();
   const navigate = useNavigate();
@@ -18,8 +19,9 @@ export default function EventInfo({ user }) {
       .then(json => {
         console.log("Event data:", json);
         setEvent(json);
+        setIsCreator(json.created_by === user?.id);
       });
-  }, [id]);
+  }, [id, user]);
 
   useEffect(() => {
     if (user) {
@@ -33,13 +35,11 @@ export default function EventInfo({ user }) {
   }, [user, id]);
 
   const handleToggleJoin = () => {
-    // redirect to login if user not logged in
     if (!user) {
       navigate('/login');
       return;
     }
 
-    // determine API endpoint based on join/unjoin
     const endpoint = isUserJoined ? `/unjoin/${id}` : `/users/${user.id}/events_joineds`;
 
     fetch(endpoint, {
@@ -65,36 +65,63 @@ export default function EventInfo({ user }) {
       });
   };
 
-  // navigate back to previous page
+  const handleDeleteEvent = () => {
+    fetch(`/events/${id}`, {
+      method: 'DELETE',
+    })
+      .then(response => response.json())
+      .then(json => {
+        console.log("Delete Event Response:", json);
+        if (json.status === 'deleted') {
+          navigate(-1); 
+        } else {
+          setSuccessMessage('Failed to delete the event.');
+        }
+      })
+      .catch(error => {
+        console.error("Error during event deletion:", error);
+        setSuccessMessage('Failed to delete the event. An error occurred.');
+      });
+  };
+
   const handleBack = () => {
     navigate(-1);
   };
 
   return (
+    <div>
     <div className="singular-event-container">
       {!event.error ? (
         <div className="event-info-card">
           <h1>{event.title}</h1>
           <h2>{event.date}</h2>
           <p>{event.description}</p>
-
+  
           <div className="info-button-container">
-          <button id="join-unjoin-button" onClick={handleToggleJoin} className={isUserJoined ? 'negative-action' : 'positive-action'}>
-            {isUserJoined ? 'Unjoin Event' : 'Join Event'}
-          </button>
-
-          <div className="back-button-container">
-          <button onClick={handleBack}>Back</button>
-          </div>
+            <button id="join-unjoin-button" onClick={handleToggleJoin} className={isUserJoined ? 'negative-action' : 'positive-action'}>
+              {isUserJoined ? 'Unjoin Event' : 'Join Event'}
+            </button>
+            <div className="back-button-container">
+            <button onClick={handleBack}>Back</button>
+            </div>
           </div>
           {successMessage && <p id="success-message">{successMessage}</p>}
         </div>
       ) : (
         <p>No event found</p>
       )}
-
+  
       <h2>Comments</h2>
       <Comments user={user} />
     </div>
+
+    {isCreator && (
+        <div className="delete-event-container">
+          <button className="delete-button" onClick={handleDeleteEvent}>Delete Event</button>
+        </div>
+    )}
+
+    </div>
   );
+  
 }
