@@ -42,6 +42,10 @@ export default function UserInfo() {
   };
 
   return (
+    <div>
+      <div className="userinfo-backbutton">
+        <button onClick={handleBack}>Back</button>
+      </div>
     <div className="user-info-container">
       <div className="events-joined-container">
         {!user.error ? (
@@ -70,9 +74,7 @@ export default function UserInfo() {
           <p>You haven't logged in yet! Log in or Sign up to continue!</p>
         )}
       </div>
-      <div className="userinfo-backbutton">
-        <button onClick={handleBack}>Back</button>
-      </div>
+    </div>
     </div>
   );
 }
