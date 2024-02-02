@@ -29,7 +29,7 @@ function App() {
   return (
     <Router>
       <div>
-        <NavBar user={user} />
+        <NavBar user={user} setUser={setUser}/>
 
         <div>
           {/* {user ? (
@@ -42,7 +42,7 @@ function App() {
           )} */}
 
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home user={user}/>} />
             <Route path="/events" element={<Events user={user} />} />
             <Route path="/events/:id" element={<EventInfo user={user}/>} />
             <Route path="/users/:id" element={<UserInfo />} />

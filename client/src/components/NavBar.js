@@ -3,25 +3,27 @@ import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import Logout from './Logout'; 
 
-export default function NavBar() {
+export default function NavBar( { user, setUser } ) {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    fetch('/me')
-      .then(response => {
-        if (response.ok) {
-          response.json().then(json => setUser(json));
-        }
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('/me')
+  //     .then(response => {
+  //       if (response.ok) {
+  //         response.json().then(json => setUser(json));
+  //       }
+  //     });
+  // }, []);
 
   const handleSignUpClick = () => {
-    // Navigate to SignUp page
+    // navigate to signUp page
     navigate('/login');
   };
 
-
+  const handleLogout = () => {
+    setUser(null);
+  };
 
   return (
     <nav>
@@ -32,7 +34,7 @@ export default function NavBar() {
         {user ? (
           <>
             <li id="welcome-user"><Link to={`/users/${user.id}`}>Welcome {user.username}!</Link></li>
-            <li id="logout-button"><Logout onLogout={() => { setUser(null) }} /></li>
+            <li id="logout-button"><Logout onLogout={handleLogout} /></li>
           </>
         ) : (
           <li onClick={handleSignUpClick}><Link to="#" >LOG IN</Link></li>
