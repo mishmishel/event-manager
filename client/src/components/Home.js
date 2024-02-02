@@ -6,7 +6,6 @@ export default function Home() {
     const [selectedMonth, setSelectedMonth] = useState(new Date());
 
     useEffect(() => {
-        // Fetch events data here
         fetch('/events')
           .then(response => response.json())
           .then(json => setEvents(json))

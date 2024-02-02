@@ -45,7 +45,7 @@ export default function Events({ user }) {
             </Link>
           ))
         ) : (
-          <p>No event found</p>
+          <p></p>
         )}
       </div>
         <button className="back-button" onClick={handleBack}>Back</button>
