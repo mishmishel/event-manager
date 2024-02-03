@@ -33,6 +33,8 @@ export default function EventCalendar({ events }) {
       }
     });
 
+    filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+
     setFilteredEvents(filtered);
   };
 
