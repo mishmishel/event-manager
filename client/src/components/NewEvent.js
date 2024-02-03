@@ -7,6 +7,7 @@ export default function NewEvent({ user }) {
     const[date, setDate] = useState("")
     const[description, setDescription] = useState("")
     const[success, setSuccess] = useState("")
+    const [buttonClickedWhileDisabled, setButtonClickedWhileDisabled] = useState(false);
 
     const navigate = useNavigate();
 
@@ -15,6 +16,11 @@ export default function NewEvent({ user }) {
 
         const userId = user.id;
         console.log("User ID (created_by):", userId);
+
+        if (!title || !date || !description) {
+            setButtonClickedWhileDisabled(true);
+            return; // Don't proceed if form is incomplete
+        }
 
         fetch('/events', {
             method: "POST",
@@ -31,13 +37,16 @@ export default function NewEvent({ user }) {
         })
         .then(response => response.json())
         .then(json=>{
-            setSuccess("The Event "+json.title+" was added.")
+            setSuccess("The Event "+json.title+" was added.");
+            setTitle(""); 
+            setDate(""); 
+            setDescription(""); 
         })
     }
 
     const handleBack = () => {
         navigate(-1);
-    };    
+    };
 
     return (
         <div className='new-event-container'>
@@ -52,7 +61,8 @@ export default function NewEvent({ user }) {
                 <label for="description">Description:</label>
                 <input type="text" id="description" onChange={(e) => setDescription(e.target.value)} value={description}/>
 
-                <input type="submit" value="Add New Event"/>
+                <input type="submit" value="Add New Event" />
+                {buttonClickedWhileDisabled && <p>You must complete all fields before submitting the form.</p>}
             </form>
             <p id="event-was-added">{success}</p>
 
