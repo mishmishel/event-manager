@@ -112,7 +112,7 @@ export default function EventCalendar({ events }) {
       {filteredEvents.length > 0 ? (
         <ul>
           {filteredEvents.map((event) => (
-            <li key={event.id}><Link to={`/events/${event.id}`}>{event.title} on {event.date}</Link></li>
+            <li key={event.id}><Link to={`/events/${event.id}`}>{event.title}</Link></li>
           ))}
         </ul>
       ) : (
