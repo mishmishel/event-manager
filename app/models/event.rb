@@ -1,5 +1,5 @@
 class Event < ApplicationRecord
-    has_many :events_joined
+    has_many :events_joined, dependent: :destroy
     has_many :users, through: :events_joined
     has_many :comments
 
