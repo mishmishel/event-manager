@@ -7,7 +7,8 @@ export default function EventInfo({ user }) {
   const [event, setEvent] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
   const [isUserJoined, setIsUserJoined] = useState(false);
-  const [isCreator, setIsCreator] = useState(false); 
+  const [isCreator, setIsCreator] = useState(false);
+  const [isEventPassed, setIsEventPassed] = useState(false);
   
   const { id } = useParams();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function EventInfo({ user }) {
         console.log("Event data:", json);
         setEvent(json);
         setIsCreator(json.created_by === user?.id);
+        setIsEventPassed(new Date(json.date) < new Date()); // check if event date is in the past
       });
   }, [id, user]);
 
@@ -35,6 +37,11 @@ export default function EventInfo({ user }) {
   }, [user, id]);
 
   const handleToggleJoin = () => {
+    if (isEventPassed) {
+      setSuccessMessage('Event has already passed. Unable to join.');
+      return;
+    }
+
     if (!user) {
       navigate('/login');
       return;
@@ -101,8 +108,12 @@ export default function EventInfo({ user }) {
           <p>{event.description}</p>
   
           <div className="info-button-container">
-            <button id="join-unjoin-button" onClick={handleToggleJoin} className={isUserJoined ? 'negative-action' : 'positive-action'}>
-              {isUserJoined ? 'Unjoin Event' : 'Join Event'}
+            <button id="join-unjoin-button" 
+            onClick={handleToggleJoin} 
+            className={(isEventPassed) ? 'disabled' : (isUserJoined ? 'negative-action' : 'positive-action')}
+            disabled={isEventPassed} 
+            >
+              {isEventPassed ? 'Event Passed' : isUserJoined ? 'Unjoin Event' : 'Join Event'}
             </button>
           </div>
           {successMessage && <p id="success-message">{successMessage}</p>}
