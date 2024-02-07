@@ -9,3 +9,9 @@
 .signup-button-container button:hover {
     background-color: #4DEAB6;
 }
+
+#sign-up-error {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    color: #ff41a0;
+}

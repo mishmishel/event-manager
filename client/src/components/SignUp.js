@@ -69,7 +69,6 @@ export default function SignUp({ onSignUp }) {
 
   return (
     <form onSubmit={handleSignUp}>
-      {signUpError && <p>{signUpError}</p>}
       <label htmlFor="username">Username:</label>
       <input type="text" id="username" name="username" value={usernameInput} onChange={(e) =>
         { setUsernameInput(e.target.value) }} />
@@ -88,6 +87,7 @@ export default function SignUp({ onSignUp }) {
       <label htmlFor="passwordconfirmation">Retype Password:</label>
       <input type="password" id="passwordconfirmation" name="passwordconfirmation" value={passwordConfirmationInput} onChange={(e) =>
         { setPasswordConfirmationInput(e.target.value) }} />
+        {signUpError && <p id="sign-up-error">{signUpError}</p>}
         <div className="signup-button-container">
         <button type="submit">Sign Up</button>
         </div>
