@@ -108,16 +108,15 @@ export default function EventCalendar({ events }) {
       ) : (
         <h3>Events for {date.toLocaleString('default', { month: 'long', year: 'numeric', day: 'numeric' })}</h3>
       )}
-
-      {filteredEvents.length > 0 ? (
-        <ul>
-          {filteredEvents.map((event) => (
-            <li key={event.id}><Link to={`/events/${event.id}`}>{event.title}</Link></li>
+       {filteredEvents.length > 0 ? (
+          <ul>
+            {filteredEvents.map((event) => (
+          <li key={event.id}><Link to={`/events/${event.id}`}>{event.title}</Link></li>
           ))}
-        </ul>
-      ) : (
-        <p>No events on {date.toLocaleString('default', { month: 'long', year: 'numeric', day: 'numeric' })}</p>
-      )}
+          </ul>
+          ) : (
+          <p>No events on {date.toLocaleString('default', { month: 'long', year: 'numeric', day: 'numeric' })}</p>
+          )}
       </div>
     </div>
     </div>

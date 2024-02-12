@@ -6,6 +6,7 @@
     max-width: 600px; /* Adjust the max-width as needed */
     margin: 0 auto;
     margin-top: 20px;
+    margin-bottom: 40px;
     padding: 20px;
     border: 3px solid #d5ffc6;
     border-radius: 14px;
@@ -58,7 +59,7 @@
     border: none;
     border-radius: 12px;
     background-color: #d5ffc6;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
 
   .event-info-card h1 {

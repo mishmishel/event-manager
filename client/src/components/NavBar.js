@@ -27,7 +27,7 @@ export default function NavBar( { user, setUser } ) {
 
   return (
     <nav>
-      <label className="logo">Sydney Dance Events</label>
+      <label className="logo">Sydney Dance</label>
       <ul>
         <li><Link to="/">HOME</Link></li>
         <li><Link to="/events">EVENTS</Link></li>
