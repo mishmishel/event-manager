@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import './Comments.css';
 
-export default function Comments( { user } ) {
+export default function Comments( { user, setUser} ) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const { id } = useParams(); 
