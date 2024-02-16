@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     def create
         if User.exists?(username: params[:username])
             render json: { errors: ["Username is already taken. Please choose a different one."] }, status: :unprocessable_entity
+        elsif User.exists?(email: params[:email])
+            render json: { errors: ["Email is already taken. Please choose a different one."] }, status: :unprocessable_entity
           else
             user = User.create!(user_params)
             session[:user_id] = user.id

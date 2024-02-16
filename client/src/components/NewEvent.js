@@ -48,6 +48,21 @@ export default function NewEvent({ user }) {
         navigate(-1);
     };
 
+    function getCurrentDate() {
+        const today = new Date();
+        let month = (today.getMonth() + 1).toString();
+        let day = today.getDate().toString();
+      
+        if (month.length === 1) {
+          month = '0' + month;
+        }
+        if (day.length === 1) {
+          day = '0' + day;
+        }
+      
+        return `${today.getFullYear()}-${month}-${day}`;
+    }
+
     return (
         <div className='new-event-container'>
             <h1>New Event</h1>
@@ -56,7 +71,7 @@ export default function NewEvent({ user }) {
                 <input type="text"id="title" onChange={(e) => setTitle(e.target.value)} value={title}/>
 
                 <label for="date">Date:</label>
-                <input type="date" id="date" onChange={(e) => setDate(e.target.value)} value={date}/>
+                <input type="date" id="date" onChange={(e) => setDate(e.target.value)} value={date} min={getCurrentDate()}/>
 
                 <label for="description">Description:</label>
                 <input type="text" id="description" onChange={(e) => setDescription(e.target.value)} value={description}/>

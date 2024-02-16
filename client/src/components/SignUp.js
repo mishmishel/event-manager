@@ -44,6 +44,8 @@ export default function SignUp({ onSignUp }) {
             if (data.errors && data.errors.includes('Username is already taken. Please choose a different one.')) {
               console.log(data.errors)
               setSignUpError('Username is already taken. Please choose a different one.');
+            } else if (data.errors && data.errors.includes('Email is already taken. Please choose a different one.')) {
+                setSignUpError('Email is already taken. Please choose a different one.');
             } else if (passwordInput.length  < 6) {
               setSignUpError('Password is too short. Please use at least 6 characters.');
             } else if (passwordInput !== passwordConfirmationInput){
